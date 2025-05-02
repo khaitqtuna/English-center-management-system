@@ -1,29 +1,29 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <string>
+using namespace std;
 
 
-typedef struct {
-    char ID[10];
-    char name[50];
+struct Class {
+    string ID;
+    string name;
     int studentCount;
-} Class;
+};
 
-typedef struct NodeClass {
+struct NodeClass {
     Class data;
-    struct NodeClass* next;
-} NodeClass;
+    NodeClass* next;
+};
 
 
 void initNodeClass(NodeClass*& s) {
-    s = NULL;
+    s = nullptr;
 }
 
 
 NodeClass* createNodeClass(Class data) {
-    NodeClass* node = (NodeClass*)malloc(sizeof(NodeClass));
+    NodeClass* node = new NodeClass;
     node->data = data;
-    node->next = NULL;
+    node->next = nullptr;
     return node;
 }
 
@@ -36,47 +36,48 @@ void addClass(NodeClass*& s, Class data) {
 
 
 Class deleteClass(NodeClass*& s, Class data) {
-    NodeClass* prev = NULL;
+    NodeClass* prev = nullptr;
     NodeClass* curr = s;
-    while (curr != NULL && strcmp(curr->data.ID, data.ID) != 0) {
+
+    while (curr != nullptr && curr->data.ID != data.ID) {
         prev = curr;
         curr = curr->next;
     }
-    if (curr == NULL) {
-        printf("Class not found\n");
-        Class empty = {"", "", 0};
-        return empty;
+
+    if (curr == nullptr) {
+        cout << "Class not found.\n";
+        return {"", "", 0}; // Trả về lớp rỗng
     }
 
-    if (prev == NULL) s = curr->next;
+    if (prev == nullptr) s = curr->next;
     else prev->next = curr->next;
 
     Class deleted = curr->data;
-    free(curr);
+    delete curr;
     return deleted;
 }
 
 
 NodeClass* SearchClass(NodeClass* s, Class data) {
-    while (s != NULL) {
-        if (strcmp(s->data.ID, data.ID) == 0)
+    while (s != nullptr) {
+        if (s->data.ID == data.ID)
             return s;
         s = s->next;
     }
-    return NULL;
+    return nullptr;
 }
 
 
-void changeClassInfo(NodeClass* s, char ID[]) {
-    while (s != NULL) {
-        if (strcmp(s->data.ID, ID) == 0) {
-            printf("Nhap ten moi: ");
-            scanf(" %[^\n]", s->data.name);
-            printf("Nhap so hoc vien moi: ");
-            scanf("%d", &s->data.studentCount);
+void changeClassInfo(NodeClass* s, string ID) {
+    while (s != nullptr) {
+        if (s->data.ID == ID) {
+            cout << "Nhap ten moi: ";
+            getline(cin >> ws, s->data.name);
+            cout << "Nhap so luong hoc vien moi: ";
+            cin >> s->data.studentCount;
             return;
         }
         s = s->next;
     }
-    printf("Khong tim thay lop co ID: %s\n", ID);
+    cout << "Khong tim thay lop co ID: " << ID << endl;
 }

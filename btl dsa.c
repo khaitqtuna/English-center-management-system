@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// ======= Struct ========
+
 typedef struct {
     char ID[10];
     char name[50];
@@ -14,12 +14,12 @@ typedef struct NodeClass {
     struct NodeClass* next;
 } NodeClass;
 
-// ======= 1. initNodeClass ========
+
 void initNodeClass(NodeClass*& s) {
     s = NULL;
 }
 
-// ======= 2. createNodeClass ========
+
 NodeClass* createNodeClass(Class data) {
     NodeClass* node = (NodeClass*)malloc(sizeof(NodeClass));
     node->data = data;
@@ -27,14 +27,14 @@ NodeClass* createNodeClass(Class data) {
     return node;
 }
 
-// ======= 3. addClass ========
+
 void addClass(NodeClass*& s, Class data) {
     NodeClass* newNode = createNodeClass(data);
     newNode->next = s;
     s = newNode;
 }
 
-// ======= 4. deleteClass ========
+
 Class deleteClass(NodeClass*& s, Class data) {
     NodeClass* prev = NULL;
     NodeClass* curr = s;
@@ -56,7 +56,7 @@ Class deleteClass(NodeClass*& s, Class data) {
     return deleted;
 }
 
-// ======= 5. SearchClass ========
+
 NodeClass* SearchClass(NodeClass* s, Class data) {
     while (s != NULL) {
         if (strcmp(s->data.ID, data.ID) == 0)
@@ -66,7 +66,7 @@ NodeClass* SearchClass(NodeClass* s, Class data) {
     return NULL;
 }
 
-// ======= 6. changeClassInfo ========
+
 void changeClassInfo(NodeClass* s, char ID[]) {
     while (s != NULL) {
         if (strcmp(s->data.ID, ID) == 0) {

@@ -33,31 +33,6 @@ void addClass(NodeClass*& s, Class data) {
     newNode->next = s;
     s = newNode;
 }
-
-
-Class deleteClass(NodeClass*& s, Class data) {
-    NodeClass* prev = nullptr;
-    NodeClass* curr = s;
-
-    while (curr != nullptr && curr->data.ID != data.ID) {
-        prev = curr;
-        curr = curr->next;
-    }
-
-    if (curr == nullptr) {
-        cout << "Class not found.\n";
-        return {"", "", 0}; // Trả về lớp rỗng
-    }
-
-    if (prev == nullptr) s = curr->next;
-    else prev->next = curr->next;
-
-    Class deleted = curr->data;
-    delete curr;
-    return deleted;
-}
-
-
 NodeClass* SearchClass(NodeClass* s, Class data) {
     while (s != nullptr) {
         if (s->data.ID == data.ID)
@@ -65,6 +40,38 @@ NodeClass* SearchClass(NodeClass* s, Class data) {
         s = s->next;
     }
     return nullptr;
+}
+Class deleteClass(NodeClass*& s, Class data) {
+    NodeClass* target = SearchClass(s, data); 
+
+    if (target == nullptr) {
+        cout << "Class not found.\n";
+        return {"", "", 0}; 
+    }
+
+    // Nếu node cần xóa là node đầu
+    if (target == s) {
+        s = s->next;
+        Class deleted = target->data;
+        delete target;
+        return deleted;
+    }
+
+    // Tìm node trước node cần xóa
+    NodeClass* prev = s;
+    while (prev->next != nullptr && prev->next != target) {
+        prev = prev->next;
+    }
+
+    if (prev->next == target) {
+        prev->next = target->next;
+        Class deleted = target->data;
+        delete target;
+        return deleted;
+    }
+
+    // Trường hợp không tìm thấy lại (không nên xảy ra)
+    return {"", "", 0};
 }
 
 

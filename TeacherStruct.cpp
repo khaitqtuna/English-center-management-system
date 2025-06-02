@@ -78,6 +78,46 @@ Teacher deleteTeacher(NodeTeacher* &gv, string data){
 }
 
 void changeTeacherInfo(NodeTeacher*& gv){
-    
+    int k = 1;
+    do{
+        displayTeacherInfo(gv);
+        int c = 0;
+        cout<< endl << "Nhap chu so tuong ung voi thong tin can sua:";
+        cin >> c;
+        while(c < 1 || c > 4){
+            cout<< endl << "Chu so khong hop le, moi nhap lai:";
+            cin >> c;
+        }
+        switch (c){
+            case 1:
+                cout<< endl << "Nhap du lieu moi:";
+                cin >> gv->data.name;
+                break;
+            
+            case 2:
+                cout<< endl << "Nhap du lieu moi:";
+                cin >> gv->data.ID;
+                break;
+
+            case 3:
+                cout<< endl << "Nhap du lieu moi:";
+                cin >> gv->data.exp;
+                break;
+
+            case 4:
+                cout<< endl << "Nhap du lieu moi:";
+                cin >> gv->data.wexp;
+                break;
+
+            default:
+                break;
+        }
+
+        cout<< endl << "Tiep tuc sua thong tin ?";
+        cout<< endl << "1. Co";
+        cout<< endl << "2. Khong";
+        cin>> k;
+    }
+    while(k == 1);
 }
 

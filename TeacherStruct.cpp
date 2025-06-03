@@ -4,6 +4,7 @@ using namespace std;
 
 #include "TeacherStruct.h"
 #include "ClassStruct.h"
+#include "KHstruct.h"
 
 void initTeacherDS(NodeTeacher* &gv){
     gv = NULL;
@@ -40,7 +41,7 @@ NodeTeacher* searchTeacher(NodeTeacher* &gv, string data){       //tìm bằng c
     return NULL;
 }
 
-Teacher deleteTeacher(NodeTeacher* &gv, string data){
+NodeTeacher* deleteTeacher(NodeTeacher* &gv, string data){
     if(gv == NULL){
         cout<< "Danh sach giao vien trong" << endl;
         return;
@@ -56,8 +57,8 @@ Teacher deleteTeacher(NodeTeacher* &gv, string data){
     while(ptr1 != NULL && ptr1->next != ptr)        //tra ve phan tu truoc cai can tim
         ptr1 = ptr1->next;
     
-    Teacher temp;
-    temp = ptr1->next->data;
+    NodeTeacher* temp;
+    temp = ptr1->next;
     ptr1->next = ptr->next;
     delete ptr;
     return temp;

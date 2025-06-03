@@ -74,25 +74,21 @@ void HTQLKH(QLKH* k) {
     }
 }
 void change_infKhoaHoc(QLKH*& k) {
-    HTQLKH(k);
-    cout << "\nCo muon thay doi thong tin khong ?\n";
-    cout << "1. Co\n";
-    cout << "2. Khong\n";
-    cout << "Nhap lua chon cua ban: ";
-    int check;
-    cin >> check;
+    int check = 1;
     system("cls");
+
     while (check == 1) {
     	HTQLKH(k);
-        cout << "Chon ten lop ban muon thay doi thong tin: ";
+        cout << "Nhap ten/ID lop ban muon thay doi thong tin: ";
         string name;
         cin.ignore();  
         getline(cin, name);  
 
         QLKH* t = seachKhoaHoc(k, name);
-        if (t == NULL) {
+        if (t == NULL) 
             cout << "Khong tim thay khoa hoc ten \"" << name << "\".\n";
-        } else {
+        
+        else {
             HTKhoaHoc(t->data);
             cout << "Ban muon thay doi thong tin gi?\n";
             cout << "1. Ten Khoa hoc\n";
@@ -124,7 +120,6 @@ void change_infKhoaHoc(QLKH*& k) {
                 }
             }
         }
-
        
         cout << "\nBan co muon thay doi thong tin khac khong?\n";
         cout << "1. Co\n";

@@ -27,18 +27,18 @@ void addKhoaHoc(QLKH*& k , KhoaHoc Data){
 	temp->next = newNode;
 }
 
-QLKH* seachKhoaHoc (QLKH*& k , string name){
+QLKH* seachKhoaHoc (QLKH*& k , string ID){
 	QLKH* temp = k;
 	while(temp != NULL){
-		if (temp->data.Name == name) return temp;
+		if (temp->data.ID == ID) return temp;
 		temp = temp->next;
 	}
 	return NULL;
 }
-KhoaHoc deleteKhoaHoc(QLKH*& k , string name){
-	QLKH* t = seachKhoaHoc(k , name);
+KhoaHoc deleteKhoaHoc(QLKH*& k , string ID){
+	QLKH* t = seachKhoaHoc(k , ID);
 	if (t == NULL) {
-	    cout<<"khong tim thay khoa hoc "<<name<<" de xoa.";
+	    cout<<"khong tim thay khoa hoc "<<ID<<" de xoa.";
 		return KhoaHoc();
 	}
 	if (t == k){
@@ -57,8 +57,9 @@ KhoaHoc deleteKhoaHoc(QLKH*& k , string name){
     return Data;
 }
 void HTKhoaHoc (KhoaHoc Data){
-	cout<<"Ten khoa hoc : "<<Data.Name<<endl;
-	cout<<"Trinh do yeu cau : "<<Data.type<<endl;
+	cout<<"        ID        : "<<Data.ID<<endl;
+	cout<<"   Ten khoa hoc   : "<<Data.Name<<endl;
+	cout<<" Trinh do yeu cau : "<<Data.type<<endl;
 }
 void HTQLKH(QLKH* k) {
     if (k == NULL) {
@@ -74,21 +75,21 @@ void HTQLKH(QLKH* k) {
     }
 }
 void change_infKhoaHoc(QLKH*& k) {
-    int check = 1;
+    HTQLKH(k);
+    int check = 1; 
+    cin >> check;
     system("cls");
-
     while (check == 1) {
     	HTQLKH(k);
-        cout << "Nhap ten/ID lop ban muon thay doi thong tin: ";
-        string name;
+        cout << "Chon ID khoa hoc ban muon thay doi thong tin: ";
+        string ID;
         cin.ignore();  
-        getline(cin, name);  
+        getline(cin, ID);  
 
-        QLKH* t = seachKhoaHoc(k, name);
-        if (t == NULL) 
-            cout << "Khong tim thay khoa hoc ten \"" << name << "\".\n";
-        
-        else {
+        QLKH* t = seachKhoaHoc(k, ID);
+        if (t == NULL) {
+            cout << "Khong tim thay khoa hoc ID \"" << ID << "\".\n";
+        } else {
             HTKhoaHoc(t->data);
             cout << "Ban muon thay doi thong tin gi?\n";
             cout << "1. Ten Khoa hoc\n";
@@ -114,22 +115,30 @@ void change_infKhoaHoc(QLKH*& k) {
                     t->data.type = newType;
                     break;
                 }
+                case 3 : {
+                	cout << "Nhap ID moi : ";
+					string newID;
+					cin.ignore();
+					getline(cin, newID);
+					t->data.ID = newID; 
+					break;
+				} 
 				default : {
                     cout << "Lua chon khong hop le.\n";
                     break;
                 }
             }
         }
+
        
         cout << "\nBan co muon thay doi thong tin khac khong?\n";
         cout << "1. Co\n";
         cout << "2. Khong\n";
         cout << "Nhap lua chon: ";
         cin >> check;
-        system("cls");  
+        system("cls");
     }
 }
-int main(){
-}
+
 
 

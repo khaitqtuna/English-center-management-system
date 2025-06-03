@@ -5,19 +5,6 @@ using namespace std;
 #include "TeacherStruct.h"
 #include "ClassStruct.h"
 
-struct Teacher{
-    string ID;
-    string name;
-    string exp;  //trình độ
-    int wexp;  //năm kinh nghiệm
-};
-
-struct NodeTeacher{
-    Teacher data;
-    NodeTeacher *next;
-    NodeClass *classmanage;         //con trỏ quản lý các lớp cùng gv dạy
-};
-
 void initTeacherDS(NodeTeacher* &gv){
     gv = NULL;
 }

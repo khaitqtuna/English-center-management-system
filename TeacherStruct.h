@@ -1,6 +1,19 @@
 #pragma once
 #include "TeacherStruct.cpp"
 
+struct Teacher{
+    string ID;
+    string name;
+    string exp;  //trình độ
+    int wexp;  //năm kinh nghiệm
+};
+
+struct NodeTeacher{
+    Teacher data;
+    NodeTeacher *next;
+    NodeClass *classmanage;         //con trỏ quản lý các lớp cùng gv dạy
+};
+
 void initTeacherDS(NodeTeacher* &gv);
 
 NodeTeacher* createNodeTeacher(Teacher data);
@@ -12,6 +25,8 @@ NodeTeacher* searchTeacher(NodeTeacher* &gv, string data);
 Teacher deleteTeacher(NodeTeacher* &gv, string data);
 
 void displayTeacherInfo(NodeTeacher* gv);
+
+void displayTeacherList(NodeTeacher* gv);
 
 void changeTeacherInfo(NodeTeacher*& gv);
 

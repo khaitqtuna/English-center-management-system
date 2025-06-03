@@ -4,18 +4,6 @@ using namespace std;
 
 #include "ClassStruct.h"
 
-struct Class {
-    string ID;
-    string name;
-    int studentCount;
-};
-
-struct NodeClass {
-    Class data;
-    NodeClass* next;
-};
-
-
 void initNodeClass(NodeClass*& s) {
     s = nullptr;
 }

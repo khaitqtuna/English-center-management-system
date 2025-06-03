@@ -3,8 +3,6 @@
 #include "Student.h"
 using namespace std;
 
-
-
 void initStudent(NodeStudent*& S) {
     S = NULL;
 }
@@ -140,6 +138,7 @@ void changeStudentInfo(NodeStudent*& S){
                     cin>> n;
                     t->data.age = n;
                     break;
+                }
                 case 4: {
                     cout << "Nhap gioi tinh moi: ";
                     string newType;

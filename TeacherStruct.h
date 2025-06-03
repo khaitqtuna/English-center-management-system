@@ -28,5 +28,6 @@ void displayTeacherInfo(NodeTeacher* gv);
 
 void displayTeacherList(NodeTeacher* gv);
 
-void changeTeacherInfo(NodeTeacher*& gv);
+void changeTeacherInfoForCourse(NodeTeacher*& gv);
 
+void changeTeacherInfo(NodeTeacher*& gv);

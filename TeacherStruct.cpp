@@ -84,56 +84,91 @@ void displayTeacherInfo(NodeTeacher* gv){
 }
 
 void displayTeacherList(NodeTeacher* gv){
+    if (gv == NULL) {
+        cout << "Danh sach giao vien rong." << endl;
+        return;
+    }
     NodeTeacher* ptr = gv;
     cout<< "Danh sach giao vien:" << endl;
-    while(ptr->next != NULL){
-        cout<< ptr->data.name;
+    while(ptr != NULL){
+        cout<< ptr->data.name << endl;
         ptr = ptr->next;
     }
 }
 
 void changeTeacherInfo(NodeTeacher*& gv){
-    int k = 1;
-    do{
-        displayTeacherInfo(gv);
-        int c = 0;
-        cout<< endl << "Nhap chu so tuong ung voi thong tin can sua:";
-        cin >> c;
-        while(c < 1 || c > 4){
-            cout<< endl << "Chu so khong hop le, moi nhap lai:";
-            cin >> c;
+    int check = 1;
+    system("cls");
+
+    while (check == 1) {
+    	displayTeacherList(gv);
+        cout << "Nhap ten/ID giao vien ban muon thay doi thong tin: ";
+        string name;
+        cin.ignore();  
+        getline(cin, name);  
+
+        NodeTeacher* t = searchTeacher(gv, name);
+        if (t == NULL) 
+            cout << "Danh sach giao vien rong." << endl;
+        
+        else {
+            displayTeacherInfo(t);
+            cout << "Ban muon thay doi thong tin gi?\n";
+            cout<< "1. Ten giao vien" << endl;
+            cout<< "2. ID" << endl;
+            cout<< "3. Trinh do" << endl;
+            cout<< "4. So nam kinh nghiem" << endl;
+            cout << "Nhap lua chon: ";
+            int choice;
+            cin >> choice;
+
+            switch (choice) {
+                case 1: {
+                    cout << "Nhap ten moi: ";
+                    string newName;
+                    cin.ignore();
+                    getline(cin, newName);
+                    t->data.name = newName;
+                    break;
+                }
+                case 2: {
+                    cout << "Nhap ID moi: ";
+                    string newID;
+                    cin.ignore();
+                    getline(cin, newID);
+                    t->data.ID = newID;
+                    break;
+                }
+                case 3: {
+                    cout << "Nhap trinh do moi: ";
+                    string newType;
+                    cin.ignore();
+                    getline(cin, newType);
+                    t->data.exp = newType;
+                    break;
+                }
+                case 4: {
+                    cout << "Nhap so nam kinh nghiem moi: ";
+                    int n;
+                    cin.ignore();
+                    cin>> n;
+                    t->data.wexp = n;
+                    break;
+                }
+				default : {
+                    cout << "Lua chon khong hop le.\n";
+                    break;
+                }
+            }
         }
-        switch (c){
-            case 1:
-                cout<< endl << "Nhap du lieu moi:";
-                cin >> gv->data.name;
-                break;
-            
-            case 2:
-                cout<< endl << "Nhap du lieu moi:";
-                cin >> gv->data.ID;
-                break;
-
-            case 3:
-                cout<< endl << "Nhap du lieu moi:";
-                cin >> gv->data.exp;
-                break;
-
-            case 4:
-                cout<< endl << "Nhap du lieu moi:";
-                cin >> gv->data.wexp;
-                break;
-
-            default:
-                break;
-        }
-
-        cout<< endl << "Tiep tuc sua thong tin ?";
-        cout<< endl << "1. Co";
-        cout<< endl << "2. Khong";
-        cin>> k;
+       
+        cout << "\nBan co muon thay doi thong tin khac khong?\n";
+        cout << "1. Co\n";
+        cout << "2. Khong\n";
+        cout << "Nhap lua chon: ";
+        cin >> check;
+        system("cls");  
     }
-    while(k == 1);
 }
 
 

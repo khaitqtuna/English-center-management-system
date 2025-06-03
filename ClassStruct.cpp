@@ -81,16 +81,82 @@ void displayClassInfo(NodeClass* cl){
     cout<< "3. Si so: " << cl->data.studentCount << endl;
 }
 
-void changeClassInfo(NodeClass* s, string ID) {
-    while (s != nullptr) {
-        if (s->data.ID == ID) {
-            cout << "Nhap ten moi: ";
-            getline(cin >> ws, s->data.name);
-            cout << "Nhap so luong hoc vien moi: ";
-            cin >> s->data.studentCount;
-            return;
-        }
-        s = s->next;
+void displayClassList(NodeClass* cl){
+    if (cl == NULL) {
+        cout << "Danh sach lop rong." << endl;
+        return;
     }
-    cout << "Khong tim thay lop co ID: " << ID << endl;
+    NodeClass* ptr = cl;
+    cout<< "Danh sach lop:" << endl;
+    while(ptr != NULL){
+        cout<< ptr->data.name << " - Si so: ";
+        cout<< ptr->data.studentCount << endl;
+        ptr = ptr->next;
+    }
+}
+
+void changeTeacherInfo(NodeClass* cl){
+    int check = 1;
+    system("cls");
+
+    while (check == 1) {
+    	displayClassList(cl);
+        cout << "Nhap ten/ID giao vien ban muon thay doi thong tin: ";
+        string name;
+        cin.ignore();  
+        getline(cin, name);  
+
+        NodeClass* t = searchClass(cl, name);
+        if (t == NULL) 
+            cout << "Danh sach lop rong." << endl;
+        
+        else {
+            displayClassInfo(t);
+            cout << "Ban muon thay doi thong tin gi?\n";
+            cout<< "1. Ten giao vien" << endl;
+            cout<< "2. ID" << endl;
+            cout<< "3. Si so" << endl;
+            cout << "Nhap lua chon: ";
+            int choice;
+            cin >> choice;
+
+            switch (choice) {
+                case 1: {
+                    cout << "Nhap ten moi: ";
+                    string newName;
+                    cin.ignore();
+                    getline(cin, newName);
+                    t->data.name = newName;
+                    break;
+                }
+                case 2: {
+                    cout << "Nhap ID moi: ";
+                    string newID;
+                    cin.ignore();
+                    getline(cin, newID);
+                    t->data.ID = newID;
+                    break;
+                }
+                case 3: {
+                    cout << "Nhap si so moi: ";
+                    int n;
+                    cin.ignore();
+                    cin >> n;
+                    t->data.studentCount = n;
+                    break;
+                }
+				default : {
+                    cout << "Lua chon khong hop le.\n";
+                    break;
+                }
+            }
+        }
+       
+        cout << "\nBan co muon thay doi thong tin khac khong?\n";
+        cout << "1. Co\n";
+        cout << "2. Khong\n";
+        cout << "Nhap lua chon: ";
+        cin >> check;
+        system("cls");  
+    }
 }

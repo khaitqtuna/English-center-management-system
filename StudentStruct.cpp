@@ -1,36 +1,15 @@
-﻿#include<iostream>
-#include<string>
-
+﻿#include <iostream>
+#include <string>
 using namespace std;
 
-enum level {
-	A1,A2,B1,B2,C1,C2
-};
-string displayLevel(level L) {
-    switch (L){
-    case A1: return "A1";
-    case A2: return "A2";
-    case B1: return "B1";
-    case B2: return "B2";
-    case C1: return "C1";
-    case C2: return "C2";
-    default: return "Unknown";
-    }
-}
-
-enum gender {
-	Male,Female
-};
-string displayGender(gender G) {
-    return G == Male ? "Male" : "Female";
-}
+#include "StudentStruct.h"
 
 struct Student {
 	string ID;
-	string Name;
-	int Age;
-	level L;
-	gender G;
+	string name;
+	int age;
+	string level;
+	string gender;
 };
 
 struct NodeStudent {
@@ -38,85 +17,84 @@ struct NodeStudent {
     NodeStudent* next;
 };
 
-
-typedef NodeStudent* PS;
-typedef NodeStudent* LLS;
-
-void initStudent(LLS& S) {
+void initStudent(NodeStudent*& S) {
 	S = NULL;
 }
 
-NodeStudent* createStudent(string ID, string Name, int Age, level L, gender G) {
-	PS NS = new NodeStudent;//NewStudent
-    NS->data.ID = ID;
-	NS->data.Name = Name;
-	NS->data.Age = Age;
-	NS->data.L = L;
-	NS->data.G = G;
+NodeStudent* createNodeStudent(Student data) {
+	NodeStudent* NS = new NodeStudent;//NewStudent
+    NS->data = data;
 	NS->next = NULL;
 	return NS;
 }
 
-void addStudent(LLS& S, string ID, string Name, int Age, level L, gender G) {
-	PS NNS = createStudent(ID, Name, Age, L, G);//NewNodeStudent
-	NNS->next = S;
+void addStudent(NodeStudent*& S, Student data) {
+	NodeStudent* NNS = createNodeStudent(data);//NewNodeStudent
+    if(S->next == NULL){
+        S = NNS;
+        return;
+    }
+    NNS->next = S;
 	S = NNS;
 }
 
-PS searchStudentByID(LLS S, string ID) {
-    PS ptr = S;
+NodeStudent* searchStudent(NodeStudent* &S, string data) {
+    NodeStudent* ptr = S;
     while (ptr != NULL) {
-        if (ptr->data.ID == ID)
+        if (ptr->data.ID == data)
             return ptr;
-        ptr = ptr->next;
+        else if(ptr->data.name == data)
+            return ptr; 
+        else
+            ptr = ptr->next;
     }
     return NULL;
 }
 
-void deleteStudent(LLS& S, string ID) {
-    PS target = searchStudentByID(S, ID);
-    if (target == NULL) {
-        cout << "No ID: " << ID << endl;
+Student deleteStudent(NodeStudent*& S, string data) {
+    if(S == NULL){
+        cout<< "Danh sach hoc sinh trong" << endl;
         return;
     }
-    if (target == S) S = S->next;
-    else {
-        PS prev = S;
-        while (prev->next != NULL && prev->next != target) {
-            prev = prev->next;
-        }
-        if (prev->next == target) prev->next = target->next;
+
+    NodeStudent* ptr = searchStudent(S, data);
+    if(ptr == NULL){
+        cout<< "Khong co hoc sinh can tim" << endl;
+        return;
     }
-    delete target;
-    cout << "delete ID: " << ID << endl;
+
+    NodeStudent *ptr1 = S;
+    while(ptr1 != NULL && ptr1->next != ptr)        //tra ve phan tu truoc cai can tim
+        ptr1 = ptr1->next;
+    
+    Student temp;
+    temp = ptr1->next->data;
+    ptr1->next = ptr->next;
+    delete ptr;
+    return temp;
 }
 
-void Display(LLS& S, string ID) {
-    PS target = searchStudentByID(S, ID);
-    if (target == NULL) {
-        cout << "No ID: " << ID << endl;
-        return;
-    }
-    else {
-        cout << "ID: " << target->data.ID << endl;
-        cout << "Name: " << target->data.Name << endl;
-        cout << "Level: " << displayLevel(target->data.L) << endl;
-        cout << "Age: " << target->data.Age << endl;
-        cout << "Gender: " << displayGender(target->data.G) << endl;
-    }
+void displayStudentInfo(NodeStudent*& S) {
+    cout<< "1. Ho va ten: " << S->data.name << endl;
+    cout<< "2. Gioi tinh: " << S->data.gender << endl;
+    cout<< "3. ID: " << S->data.ID << endl;
+    cout<< "4. Trinh do: " << S->data.level << endl;
+    cout<< "5. Tuoi: " << S->data.age << endl;
 }
-//void changeStudentInfo(LLS S, int ID) {
-//    PS target = searchStudentByID(S, ID);
+
+
+//void changeStudentInfo(NodeStudent* S, int ID) {
+//    NodeStudent* target = searchStudent(S, ID);
 //    if (target == NULL) {
 //        cout << "No ID: " << ID << endl;
 //        return;
 //    }
 //    cout << "insert ID " << ID << ":\n";
-//    cout << "Name: "; cin.ignore(); getline(cin, target->Name);
-//    cout << "Age: "; cin >> target->Age;
-//    int newLevel;    //ko gan duoc truc tiep enum nen su dung mot thong so trung gian
-//    cout << "Level: "; cin >> newLevel;
-//    target->L = static_cast<level>(newLevel);
+//    cout << "name: "; cin.ignore(); getline(cin, target->name);
+//    cout << "age: "; cin >> target->age;
+//    int newstring;    //ko gan duoc truc tiep enum nen su dung mot thong so trung gian
+//    cout << "string: "; cin >> newstring;
+//    target->L = static_cast<string>(newstring);
 //
 //    int newGender; cout << "Gender: "; cin >> newGender;//ko gan duoc truc tiep enum nen su dung mot thong so trung gian
 //    target->G = static_cast<gender>(newGender);

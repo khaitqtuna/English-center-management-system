@@ -2,14 +2,13 @@
 #include <string>
 using namespace std;
 
-enum Level{
-    A1, A2, B1, B2, C1, C2
-};
+#include "TeacherStruct.h"
+#include "ClassStruct.h"
 
 struct Teacher{
     string ID;
     string name;
-    Level exp;  //trình độ
+    string exp;  //trình độ
     int wexp;  //năm kinh nghiệm
 };
 
@@ -77,6 +76,22 @@ Teacher deleteTeacher(NodeTeacher* &gv, string data){
     return temp;
 }
 
+void displayTeacherInfo(NodeTeacher* gv){
+    cout<< "1. Ho va ten: " << gv->data.name << endl;
+    cout<< "2. ID: " << gv->data.ID << endl;
+    cout<< "3. Trinh do: " << gv->data.exp << endl;
+    cout<< "4. So nam kinh nghiem: " << gv->data.wexp << endl;
+}
+
+void displayTeacherList(NodeTeacher* gv){
+    NodeTeacher* ptr = gv;
+    cout<< "Danh sach giao vien:" << endl;
+    while(ptr->next != NULL){
+        cout<< ptr->data.name;
+        ptr = ptr->next;
+    }
+}
+
 void changeTeacherInfo(NodeTeacher*& gv){
     int k = 1;
     do{
@@ -121,3 +136,14 @@ void changeTeacherInfo(NodeTeacher*& gv){
     while(k == 1);
 }
 
+
+
+void TeacherManagement(QLKH* &course){
+    string k;
+    cout<< "Nhap ten/ID:";
+    cin>> k;
+    NodeTeacher* ptr = searchTeacher(course.data->);
+    displayTeacherInfo(ptr);
+    cout << endl << 
+
+}

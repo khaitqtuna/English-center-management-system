@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 
+#include "ClassStruct.h"
 
 struct Class {
     string ID;
@@ -30,50 +31,55 @@ NodeClass* createNodeClass(Class data) {
 
 void addClass(NodeClass*& s, Class data) {
     NodeClass* newNode = createNodeClass(data);
+    if(s->next == NULL){
+        s = newNode;
+        return;
+    }
     newNode->next = s;
     s = newNode;
 }
-NodeClass* SearchClass(NodeClass* s, Class data) {
+
+NodeClass* searchClass(NodeClass* s, string data) {
+    NodeClass* ptr = s;
     while (s != nullptr) {
-        if (s->data.ID == data.ID)
-            return s;
-        s = s->next;
+        if(ptr->data.ID == data)
+            return ptr;
+        else if(ptr->data.name == data)
+            return ptr;
+        else 
+            ptr = ptr->next;
     }
     return nullptr;
 }
-Class deleteClass(NodeClass*& s, Class data) {
-    NodeClass* target = SearchClass(s, data); 
 
-    if (target == nullptr) {
-        cout << "Class not found.\n";
-        return {"", "", 0}; 
+Class deleteClass(NodeClass*& s, string data) {
+    if(s == NULL){
+        cout<< "Danh sach lop trong" << endl;
+        return;
     }
 
-    // Nếu node cần xóa là node đầu
-    if (target == s) {
-        s = s->next;
-        Class deleted = target->data;
-        delete target;
-        return deleted;
+    NodeClass* ptr = searchClass(s, data);
+    if(ptr == NULL){
+        cout<< "Khong co lop can tim" << endl;
+        return;
     }
 
-    // Tìm node trước node cần xóa
-    NodeClass* prev = s;
-    while (prev->next != nullptr && prev->next != target) {
-        prev = prev->next;
-    }
-
-    if (prev->next == target) {
-        prev->next = target->next;
-        Class deleted = target->data;
-        delete target;
-        return deleted;
-    }
-
-    // Trường hợp không tìm thấy lại (không nên xảy ra)
-    return {"", "", 0};
+    NodeClass *ptr1 = s;
+    while(ptr1 != NULL && ptr1->next != ptr)        //tra ve phan tu truoc cai can tim
+        ptr1 = ptr1->next;
+    
+    Class temp;
+    temp = ptr1->next->data;
+    ptr1->next = ptr->next;
+    delete ptr;
+    return temp;
 }
 
+void displayClassInfo(NodeClass* cl){
+    cout<< "1. Ten lop: " << cl->data.name << endl;
+    cout<< "2. ID: " << cl->data.ID << endl;
+    cout<< "3. Si so: " << cl->data.studentCount << endl;
+}
 
 void changeClassInfo(NodeClass* s, string ID) {
     while (s != nullptr) {

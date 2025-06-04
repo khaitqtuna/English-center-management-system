@@ -30,3 +30,5 @@ void displayClassInfo(NodeClass* cl);
 void displayClassList(NodeClass* cl);
 
 void changeClassInfoForCourse(NodeClass* s, string ID);
+
+void TeacherClassManagement(QLKH *&course)

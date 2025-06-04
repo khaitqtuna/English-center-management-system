@@ -3,7 +3,7 @@ using namespace std;
 
 #pragma once
 #include "TeacherStruct.h"
-#include "KHstruct.cpp"
+#include "KHstruct.h"
 
 struct NodeTeacher;      
 struct NodeClass;       

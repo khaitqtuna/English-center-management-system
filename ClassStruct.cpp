@@ -43,13 +43,13 @@ NodeClass* searchClass(NodeClass* s, string data) {
 Class deleteClass(NodeClass*& s, string data) {
     if(s == NULL){
         cout<< "Danh sach lop trong" << endl;
-        return;
+        return nullptr;
     }
 
     NodeClass* ptr = searchClass(s, data);
     if(ptr == NULL){
         cout<< "Khong co lop can tim" << endl;
-        return;
+        return nullptr;
     }
 
     NodeClass *ptr1 = s;

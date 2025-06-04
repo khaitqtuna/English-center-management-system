@@ -44,13 +44,13 @@ NodeTeacher* searchTeacher(NodeTeacher* &gv, string data){       //tìm bằng c
 NodeTeacher* deleteTeacher(NodeTeacher* &gv, string data){
     if(gv == NULL){
         std::cout<< "Danh sach giao vien trong" << endl;
-        return;
+        return nullptr;
     }
 
     NodeTeacher* ptr = searchTeacher(gv, data);
     if(ptr == NULL){
         std::cout<< "Khong co giao vien can tim" << endl;
-        return;
+        return nullptr;
     }
 
     NodeTeacher *ptr1 = gv;

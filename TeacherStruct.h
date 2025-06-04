@@ -1,5 +1,6 @@
 #pragma once
 #include "TeacherStruct.cpp"
+#include "ClassStruct.h"
 
 struct Teacher{
     string ID;

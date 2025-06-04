@@ -130,7 +130,63 @@ void change_infKhoaHoc(QLKH*& k) {
         std::system("cls");  
     }
 }
-int main(){
+void classManagement(QLKH*& course) {
+    int m = 0;
+    do {
+        displayClassList(course->data.classes);
+        string k;
+        if (course->data.classes == NULL) {
+            cout << "Khong co lop nao trong khoa hoc nay.\n";
+            return;
+        }
+        cout << "1. Them lop moi\n";
+        cout << "2. Xoa lop\n";
+        cout << "3. Sua thong tin lop\n";
+        cout << "Nhap lua chon: ";
+        cin >> m;
+        cin.ignore(); 
+        switch (m) {
+            case 1: {
+                Class newClass;
+                std::cout << "Nhap ID lop: "; std::getline(std::cin, newClass.ID);
+                std::cout << "Nhap ten lop: "; std::getline(std::cin, newClass.name);
+                newClass.studentCount = 0;
+                newClass.listStudent = NULL;
+                addClass(course->data.classes, newClass);
+                std::cout << "Da them lop thanh cong!\n";
+                break;  
+            }
+            case 2: {
+                std::cout << "Nhap ten hoac ID lop can xoa: ";
+                std::string key; 
+                std::getline(std::cin, key);
+                Class deleted = deleteClass(course->data.classes, key);
+                if (deleted.ID != "" || deleted.name != "") {
+                    std::cout << "Da xoa lop thanh cong!\n";
+                } else {
+                    std::cout << "Khong tim thay lop \"" << key << "\" de xoa.\n";
+                }
+                break;
+            }
+            case 3: {
+                std::cout << "Nhap ten hoac ID lop can sua: ";
+                std::string key; 
+                std::getline(std::cin, key);
+                NodeClass* target = searchClass(course->data.classes, key);
+                if (target == NULL) {
+                    std::cout << "Khong tim thay lop \"" << key << "\".\n";
+                } else {
+                    displayClassInfo(target);
+                    changeClassInfo(target);
+                }
+                break;
+            }
+            default: {
+                std::cout << "Lua chon khong hop le. Vui long chon lai.\n";
+                break;
+            }
+    } while (m == 1);
 }
+
 
 

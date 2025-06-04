@@ -215,18 +215,20 @@ void changeTeacherInfo(NodeTeacher*& gv){
 void TeacherManagement(QLKH* &course){
     int m = 0;
     do{
+        displayTeacherList(course->all);
         string k;
-        std::cout<< "Nhap ten/ID:";
-        std::cin>> k;
+        cout << "Nhap ten/ID:";
+        cin >> k;
 
-        QLKH* temp = course;
-        NodeTeacher* key = NULL;
-        while(temp != NULL){
-            key = searchTeacher(temp->data.teachers, k);
-            if(key != NULL)
+        QLKH *temp = course;
+        NodeTeacher *key = NULL;
+        while (temp->all != NULL)
+        {
+            key = searchTeacher(temp->all, k);
+            if (key != NULL)
                 break;
-            else 
-                temp = temp->next;
+            else
+                temp->all = temp->all->next;
         }
 
         if(key == NULL){

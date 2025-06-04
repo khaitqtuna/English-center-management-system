@@ -117,6 +117,7 @@ void changeTeacherInfoForCourse(NodeTeacher*& gv){
                     std::cin.ignore();
                     getline(std::cin, newName);
                     t->data.name = newName;
+                    cout << "Thuc hien thanh cong!" << endl;
                     break;
                 }
                 case 2: {
@@ -125,6 +126,7 @@ void changeTeacherInfoForCourse(NodeTeacher*& gv){
                     std::cin.ignore();
                     getline(std::cin, newID);
                     t->data.ID = newID;
+                    cout << "Thuc hien thanh cong!" << endl;
                     break;
                 }
                 case 3: {
@@ -133,6 +135,7 @@ void changeTeacherInfoForCourse(NodeTeacher*& gv){
                     std::cin.ignore();
                     getline(std::cin, newType);
                     t->data.exp = newType;
+                    cout << "Thuc hien thanh cong!" << endl;
                     break;
                 }
                 case 4: {
@@ -141,6 +144,7 @@ void changeTeacherInfoForCourse(NodeTeacher*& gv){
                     std::cin.ignore();
                     std::cin>> n;
                     t->data.wexp = n;
+                    cout << "Thuc hien thanh cong!" << endl;
                     break;
                 }
 				default : {
@@ -202,7 +206,8 @@ void changeTeacherInfo(NodeTeacher*& gv){
             std::cin>> n;
             gv->data.wexp = n;
         }
-
+        
+        cout << "Thuc hien thanh cong!" << endl;
         std::cout << "\nBan co muon tiep tuc sua thong tin khac khong?" << endl;
         std::cout << "1. Co" << endl;
         std::cout << "2. Khong"<< endl;
@@ -251,6 +256,7 @@ void TeacherManagement(QLKH* &course){
         else if(choice == 2)
             deleteTeacher(temp->data.teachers, k);
 
+        cout << "Thuc hien thanh cong!" << endl;
         std::cout << "\nBan co muon tiep tuc quan ly giao vien khong?" << endl;
         std::cout << "1. Co" << endl;
         std::cout << "2. Khong"<< endl;

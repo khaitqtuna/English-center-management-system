@@ -182,7 +182,7 @@ void TeacherClassManagement(QLKH *&course)
         }
 
         displayClassInfo(key);
-        displayTeacherList(ptr->data.teachers);
+        displayTeacherList(key->managedBy);
         int choice = 0;
         cout << "Nhap lua chon:" << endl;
         cout << "1. Them giao vien vao lop" << endl;
@@ -198,15 +198,30 @@ void TeacherClassManagement(QLKH *&course)
             cout << "Nhap ten/ID giao vien can them: ";
             cin.ignore();
             getline(cin, search);
-            NodeTeacher* t = searchTeacher(ptr->data.teachers, search);
+            NodeTeacher* t = searchTeacher(key->managedBy, search);
+            if(t == NULL){
+                cout << "Khong tim thay giao vien" << endl;
+                continue;
+            }
             addClass(t->classmanage, key->data);
             addTeacher(key->managedBy, t->data);
-            cout << "Da them giao vien vao lop thanh cong!" << endl;
         }
             
-        else if (choice == 2)
-            deleteTeacher(temp->data.teachers, k);
-
+        else if (choice == 2){
+            string search;
+            cout << "Nhap ten/ID giao vien can xoa: ";
+            cin.ignore();
+            getline(cin, search);
+            NodeTeacher* t = searchTeacher(key->managedBy, search);
+            if(t == NULL){
+                cout << "Khong tim thay giao vien" << endl;
+                continue;
+            }
+            deleteTeacher(key->managedBy, t->data->ID);
+            deleteClass(t->classmanage, key->data.ID);
+        }
+        
+        cout << "Thuc hien thanh cong!" << endl;
         cout << "\nBan co muon tiep tuc quan ly giao vien cua lop khong?" << endl;
         cout << "1. Co" << endl;
         cout << "2. Khong" << endl;

@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 using namespace std;
+
 void saveClassToFile(NodeClass* head, const string& filename) {
     ofstream out(filename);
     if (!out) {

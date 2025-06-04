@@ -6,6 +6,7 @@ using namespace std;
 
 void initNodeClass(NodeClass*& s) {
     s = nullptr;
+    s->managedBy = nullptr; // Initialize managedBy to nullptr
 }
 
 
@@ -160,17 +161,18 @@ void TeacherClassManagement(QLKH *&course)
             temp = temp->next;
         }
         string k;
-        cout << "Nhap ten/ID:";
+        cout << "Nhap ten/ID lop:";
         cin >> k;
 
         NodeClass *key = NULL;
-        while (temp != NULL)
+        QLKH *ptr = course;
+        while (ptr != NULL)
         {
-            key = searchClass(temp->data.classes, k);
+            key = searchClass(ptr->data.classes, k);
             if (key != NULL)
                 break;
             else
-                temp = temp->next;
+                ptr = ptr->next;
         }
 
         if (key == NULL)
@@ -180,29 +182,32 @@ void TeacherClassManagement(QLKH *&course)
         }
 
         displayClassInfo(key);
+        displayTeacherList(ptr->data.teachers);
         int choice = 0;
         cout << "Nhap lua chon:" << endl;
-        cout << "1. Sua thong tin giao vien" << endl;
-        cout << "2. Xoa thong tin giao vien" << endl;
-        cout << "3. Them giao vien" << endl;
+        cout << "1. Them giao vien vao lop" << endl;
+        cout << "2. Xoa giao vien khoi lop" << endl;
         cin >> choice;
-        while (choice != 1 || choice != 2 || choice != 3)
+        while (choice != 1 || choice != 2)
         {
             cout << "Lua chon khong hop le, hayh nhap lai:";
             cin >> choice;
         }
-        if (choice == 1)
-            changeTeacherInfo(key);
+        if (choice == 1){
+            string search;
+            cout << "Nhap ten/ID giao vien can them: ";
+            cin.ignore();
+            getline(cin, search);
+            NodeTeacher* t = searchTeacher(ptr->data.teachers, search);
+            addClass(t->classmanage, key->data);
+            addTeacher(key->managedBy, t->data);
+            cout << "Da them giao vien vao lop thanh cong!" << endl;
+        }
+            
         else if (choice == 2)
             deleteTeacher(temp->data.teachers, k);
-        else if (choice == 3)
-        {
-            Teacher draft;
-            addTeacherInfo(draft);
-            addTeacher(course->all, draft);
-        }
 
-        cout << "\nBan co muon tiep tuc quan ly giao vien khong?" << endl;
+        cout << "\nBan co muon tiep tuc quan ly giao vien cua lop khong?" << endl;
         cout << "1. Co" << endl;
         cout << "2. Khong" << endl;
         cout << "Nhap lua chon:";

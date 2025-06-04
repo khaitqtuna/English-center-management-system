@@ -12,6 +12,7 @@ struct Class {
 struct NodeClass {
     Class data;
     NodeClass* next;
+    NodeTeacher* managedBy;
 };
 
 void initNodeClass(NodeClass*& s);

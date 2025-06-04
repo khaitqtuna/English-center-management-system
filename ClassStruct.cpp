@@ -84,7 +84,7 @@ void displayClassList(NodeClass* cl){
     }
 }
 
-void changeTeacherInfoForCourse(NodeClass* cl){
+void changeClassInfoForCourse(NodeClass* cl){
     int check = 1;
     system("cls");
 

@@ -84,6 +84,124 @@ void displayClassList(NodeClass* cl){
     }
 }
 
+void changeClassInfo(NodeClass* cl){
+    int check = 1;
+    system("cls");
+    if (cl == NULL) {
+        cout << "Danh sach lop rong." << endl;
+        return;
+    }
+
+    while (check == 1) {
+        displayClassList(cl);
+        cout << "Nhap ten/ID lop ban muon thay doi thong tin: ";
+        string name;
+        cin.ignore(); // Chỉ gọi khi cần, nếu trước đó có nhập số bằng cin >>
+        getline(cin, name);
+
+        NodeClass* t = searchClass(cl, name);
+        if (t == NULL) {
+            cout << "Khong tim thay lop." << endl;
+        } else {
+            displayClassInfo(t);
+            cout << "\nBan muon thay doi thong tin gi?\n";
+            cout << "1. Ten lop" << endl;
+            cout << "2. ID lop" << endl;
+            cout << "3. Si so" << endl;
+            cout << "4. Thay doi thong tin sinh vien" << endl;
+            cout << "Nhap lua chon: ";
+            int choice;
+            cin >> choice;
+            cin.ignore(); // Chỉ gọi sau khi nhập số
+
+            switch (choice) {
+                case 1: {
+                    cout << "Nhap ten moi: ";
+                    string newName;
+                    getline(cin, newName);
+                    t->data.name = newName;
+                    break;
+                }
+                case 2: {
+                    cout << "Nhap ID moi: ";
+                    string newID;
+                    getline(cin, newID);
+                    t->data.ID = newID;
+                    break;
+                }
+                case 3: {
+                    cout << "Nhap si so moi: ";
+                    int n;
+                    cin >> n;
+                    t->data.studentCount = n;
+                    break;
+                }
+                case 4: {
+                    int svChoice;
+                    do {
+                        cout << "\n--- QUAN LY SINH VIEN TRONG LOP ---\n";
+                        cout << "1. Them sinh vien" << endl;
+                        cout << "2. Sua thong tin sinh vien" << endl;
+                        cout << "3. Xoa sinh vien" << endl;
+                        cout << "0. Quay lai" << endl;
+                        cout << "Nhap lua chon: ";
+                        cin >> svChoice;
+                        cin.ignore();
+                        if (svChoice == 1) {
+                            Student newStudentData;
+                            cout << "Nhap ID sinh vien: ";
+                            getline(cin, newStudentData.ID);
+                            cout << "Nhap ten sinh vien: ";
+                            getline(cin, newStudentData.name);
+                            cout << "Nhap tuoi sinh vien: ";
+                            cin >> newStudentData.age;
+                            cin.ignore();
+                            cout << "Nhap gioi tinh sinh vien: ";
+                            getline(cin, newStudentData.gender);
+                            cout << "Nhap trinh do sinh vien: ";
+                            getline(cin, newStudentData.level);
+                            addStudent(t->data.listStudent, newStudentData);
+                            t->data.studentCount++;
+                            cout << "Da them sinh vien thanh cong!" << endl;
+                        } else if (svChoice == 2) {
+                            if (t->data.listStudent == NULL) {
+                                cout << "Lop hien tai chua co sinh vien.\n";
+                            } else {
+                                changeStudentInfo(t->data.listStudent);
+                            }
+                        } else if (svChoice == 3) {
+                            if (t->data.listStudent == NULL) {
+                                cout << "Lop hien tai chua co sinh vien.\n";
+                            } else {
+                                cout << "Nhap ID hoac ten sinh vien can xoa: ";
+                                string stuKey;
+                                getline(cin, stuKey);
+                                Student deleted = deleteStudent(t->data.listStudent, stuKey);
+                                if (deleted.ID != "" || deleted.name != "") {
+                                    t->data.studentCount--;
+                                    cout << "Da xoa sinh vien thanh cong!\n";
+                                }
+                            }
+                        }
+                    } while (svChoice != 0);
+                    break;
+                }
+                default : {
+                    cout << "Lua chon khong hop le.\n";
+                    break;
+                }
+            }
+        }
+
+        cout << "\nBan co muon thay doi thong tin khac khong?\n";
+        cout << "1. Co\n";
+        cout << "2. Khong\n";
+        cout << "Nhap lua chon: ";
+        cin >> check;
+        cin.ignore(); // Chỉ gọi sau khi nhập số
+        system("cls");
+    }
+}
 void changeClassInfoForCourse(NodeClass* cl){
     int check = 1;
     system("cls");

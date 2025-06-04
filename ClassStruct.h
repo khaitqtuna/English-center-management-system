@@ -5,6 +5,7 @@
 struct Class {
     string ID;
     string name;
+    int studentCount;
     NodeStudent* listStudent;
 };
 

@@ -23,12 +23,17 @@ void addTeacher(NodeTeacher* &gv, Teacher data);
 
 NodeTeacher* searchTeacher(NodeTeacher* &gv, string data);
 
-Teacher deleteTeacher(NodeTeacher* &gv, string data);
+NodeTeacher* deleteTeacher(NodeTeacher* &gv, string data);
 
 void displayTeacherInfo(NodeTeacher* gv);
 
 void displayTeacherList(NodeTeacher* gv);
 
+void addTeacherInfo(Teacher data);
+
 void changeTeacherInfoForCourse(NodeTeacher*& gv);
 
 void changeTeacherInfo(NodeTeacher*& gv);
+
+void TeacherManagement(QLKH *&course);
+

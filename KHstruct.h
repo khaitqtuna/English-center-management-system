@@ -1,8 +1,9 @@
-#ifndef QLKH_H        
-#define QLKH_H
-
 #include <string>
 using namespace std;
+
+#pragma once
+#include "TeacherStruct.h"
+#include "KHstruct.cpp"
 
 struct NodeTeacher;      
 struct NodeClass;       
@@ -17,6 +18,7 @@ struct KhoaHoc {
 
 struct QLKH {
     KhoaHoc data;
+    NodeTeacher* all;
     QLKH*   next;
 };
 
@@ -30,8 +32,4 @@ KhoaHoc deleteKhoaHoc  (QLKH*& k, std::string name);
 void   HTKhoaHoc       (KhoaHoc Data);
 void   HTQLKH          (QLKH* k);
 void   change_infKhoaHoc(QLKH*& k);
-
-
-
-#endif 
 

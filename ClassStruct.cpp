@@ -83,7 +83,7 @@ void displayClassList(NodeClass* cl){
     }
 }
 
-void changeTeacherInfo(NodeClass* cl){
+void changeTeacherInfoForCourse(NodeClass* cl){
     int check = 1;
     system("cls");
 
@@ -147,4 +147,65 @@ void changeTeacherInfo(NodeClass* cl){
         cin >> check;
         system("cls");  
     }
+}
+
+void TeacherClassManagement(QLKH *&course)
+{
+    int m = 0;
+    do
+    {
+        QLKH *temp = course;
+        while (temp->data.classes != NULL){
+            displayClassList(temp->data.classes);
+            temp = temp->next;
+        }
+        string k;
+        cout << "Nhap ten/ID:";
+        cin >> k;
+
+        NodeClass *key = NULL;
+        while (temp != NULL)
+        {
+            key = searchClass(temp->data.classes, k);
+            if (key != NULL)
+                break;
+            else
+                temp = temp->next;
+        }
+
+        if (key == NULL)
+        {
+            cout << "Khong tim thay lop" << endl;
+            continue;
+        }
+
+        displayClassInfo(key);
+        int choice = 0;
+        cout << "Nhap lua chon:" << endl;
+        cout << "1. Sua thong tin giao vien" << endl;
+        cout << "2. Xoa thong tin giao vien" << endl;
+        cout << "3. Them giao vien" << endl;
+        cin >> choice;
+        while (choice != 1 || choice != 2 || choice != 3)
+        {
+            cout << "Lua chon khong hop le, hayh nhap lai:";
+            cin >> choice;
+        }
+        if (choice == 1)
+            changeTeacherInfo(key);
+        else if (choice == 2)
+            deleteTeacher(temp->data.teachers, k);
+        else if (choice == 3)
+        {
+            Teacher draft;
+            addTeacherInfo(draft);
+            addTeacher(course->all, draft);
+        }
+
+        cout << "\nBan co muon tiep tuc quan ly giao vien khong?" << endl;
+        cout << "1. Co" << endl;
+        cout << "2. Khong" << endl;
+        cout << "Nhap lua chon:";
+        cin >> m;
+    } while (m == 1);
 }

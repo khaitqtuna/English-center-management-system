@@ -28,4 +28,4 @@ void displayClassInfo(NodeClass* cl);
 
 void displayClassList(NodeClass* cl);
 
-void changeClassInfo(NodeClass* s, string ID);
+void changeClassInfoForCourse(NodeClass* s, string ID);

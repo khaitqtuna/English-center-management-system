@@ -9,6 +9,7 @@ struct NodeClass;
 
 struct KhoaHoc {
     std::string Name;
+    std::string ID;
     NodeTeacher* teachers;
     NodeClass*   classes;
     std::string  type;

@@ -5,15 +5,16 @@
 #include<vector>
 
 void exportCoursesToFile(KhoaHoc K, string& KhoaHocFile) {
-    ofstream outfile(KhoaHocFile);
-    if (!outfile) {
-        std::cout << "ERROR: khong the viet vao file!" << endl;
+    ofstream outfile(KhoaHocFile, ios::out | ios::trunc);
+    if (!outfile..is_open()) {
+        std::cout << "File dang duoc mo, khong the ghi vao file!" << endl;
         return;
     }
     QLKH* current = K;
     while (current != nullptr) {
-        outfile << current->data.Name << ","
-            << current->data.type << "\n";
+        outfile << current->data.Name << "," 
+            << current->data.ID << ","
+            << current->data.type << "endl";
         current = current->next;
     }
     outfile.close();
@@ -22,10 +23,11 @@ void exportCoursesToFile(KhoaHoc K, string& KhoaHocFile) {
 QLKH* importCoursesFromFile(const string& KhoaHocFile) {
     ifstream infile(KhoaHocFile);
     QLKH* newList = NULL;
-    if (!infile) {
-        cout << "ERROR: khong the nhap vao file!" << endl;
+    if (!infile.is_open()) {
+        cout << "File dang duoc mo, khong the doc vao file!" << endl;
         return NULL;
     }
+    KhoaHoc data;
     string line;
     while (getline(infile, line)) {
         stringstream ss(line);
@@ -34,10 +36,11 @@ QLKH* importCoursesFromFile(const string& KhoaHocFile) {
         while (getline(ss, token, ',')) {
             tokens.push_back(token);
         }
-        if (tokens.size() == 2) {
-            string Name = tokens[0];
-            string type = tokens[1];
-            addKhoaHoc(newList,Name, type);
+        if (tokens.size() == 3) {
+            data.Name = tokens[0];
+            data.ID = tokens[1];
+            data.type = tokens[2];
+            addKhoaHoc(newList, data);
         }
     }
     infile.close();

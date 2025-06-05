@@ -29,6 +29,7 @@ NodeClass* importClassFromFile(const string& ClassFile) {
     }
     NodeClass* newList = NULL;
     string line;
+    Class data;
     while (getline(infile, line)) {
         stringstream ss(line);
         string token;
@@ -37,10 +38,10 @@ NodeClass* importClassFromFile(const string& ClassFile) {
             tokens.push_back(token);
         }
         if (tokens.size() == 3) {
-            string ID = tokens[0];
-            string name = tokens[1];
-            int studentCount; stringstream studentCountStream(tokens[2]); studentCountStream >> studentCount;
-            addStudent(newList, ID, Name, studentCount);
+            data.ID = tokens[0];
+            data.name = tokens[1];
+            stringstream studentCountStream(tokens[2]); studentCountStream >> data.studentCount;
+            addStudent(newList, data);
         }
     }
     infile.close();

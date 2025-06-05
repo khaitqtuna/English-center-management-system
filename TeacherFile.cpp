@@ -29,6 +29,7 @@ NodeTeacher* importTeacherFromFile(const string& TeacherFile) {
         return NULL;
     }
     NodeTeacher* newList = NULL;
+    Teacher data;
     string line;
     while (getline(infile, line)) {
         stringstream ss(line);
@@ -38,11 +39,11 @@ NodeTeacher* importTeacherFromFile(const string& TeacherFile) {
             tokens.push_back(token);
         }
         if (tokens.size() == 4) {
-            string ID = tokens[0];
-            string name = tokens[1];
-            int exp; stringstream expStream(tokens[2]); expStream >> exp;            
-            int wexp; stringstream wexpStream(tokens[3]); wexpStream >> wexp;
-            addStudent(newList, ID, Name, Age, exp, wexp);
+            data.ID = tokens[0];
+            data.name = tokens[1];
+            data.exp = tokens[2];            
+            stringstream wexpStream(tokens[3]); wexpStream >> data.wexp;
+            addStudent(newList, data);
         }
     }
     infile.close();

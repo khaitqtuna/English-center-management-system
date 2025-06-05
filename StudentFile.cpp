@@ -4,8 +4,8 @@
 #include<fstream>
 #include<vector>
 
-void exportStudentToFile(Student S, string& studentFile) {
-    ofstream outfile(studentFile);
+void exportStudentToFile(Student S, string& StudentFile) {
+    ofstream outfile(StudentFile);
     if (!outfile) {
         std::cout << "ERROR: khong the viet vao file!" << endl;
         return;
@@ -22,8 +22,8 @@ void exportStudentToFile(Student S, string& studentFile) {
     outfile.close();
 }
 
-NodeStudent* importStudentsFromFile(const string& studentFile) {
-    ifstream infile(studentFile);
+NodeStudent* importStudentsFromFile(const string& StudentFile) {
+    ifstream infile(StudentFile);
     NodeStudent* newList = NULL;
     if (!infile) {
         cout << "ERROR: khong the nhap vao file!" << endl;

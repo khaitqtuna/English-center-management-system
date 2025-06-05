@@ -14,10 +14,10 @@ void exportStudentToFile(NodeStudent* S, string& StudentFile) {
     NodeStudent* current = S;
     while (current != nullptr) {
         outfile << current->data.ID << ","
-            << current->data.Name << ","
-            << current->data.Age << ","
-            << current->data.Level << ","
-            << current->data.Gender << endl;
+            << current->data.name << ","
+            << current->data.age << ","
+            << current->data.level << ","
+            << current->data.gender << endl;
         current = current->next;
     }
     outfile.close();
@@ -30,6 +30,7 @@ NodeStudent* importStudentsFromFile(const string& StudentFile) {
         return NULL;
     }
     NodeStudent* newList = NULL;
+    Student data;
     string line;
     while (getline(infile, line)) {
         stringstream ss(line);
@@ -39,12 +40,12 @@ NodeStudent* importStudentsFromFile(const string& StudentFile) {
             tokens.push_back(token);
         }
         if (tokens.size() == 5) {
-            string ID = tokens[0];
-            string Name = tokens[1];
-            int Age; stringstream ageStream(tokens[2]); ageStream >> Age;
-            string Level = tokens[3];
-            string Gender = tokens[4];
-            addStudent(newList, ID, Name, Age, Level, Gender);
+            data.ID = tokens[0];
+            data.name = tokens[1];
+            stringstream ageStream(tokens[2]); ageStream >> data.age;
+            data.level = tokens[3];
+            data.gender = tokens[4];
+            addStudent(newList, data);
         }
     }
     infile.close();

@@ -28,7 +28,6 @@ void systemManagement(QLKH* ql){
     cout<< "1. Khoa hoc" << endl;
     cout<< "2. Giao vien" << endl;
     cout<< "3. Lop hoc" << endl;
-    cout<< "4. Hoc vien" << endl;
     cout<< endl << "Lua chon:";
 }
 

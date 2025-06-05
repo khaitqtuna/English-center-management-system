@@ -40,6 +40,7 @@ Student deleteStudent(NodeStudent*& S, string data) {
         return Student();
     }
 
+    // N?u ph?n t? �?u l� ph?n t? c?n x�a
     if (S->data.ID == data || S->data.name == data) {
         NodeStudent* del = S;
         Student temp = del->data;
@@ -66,116 +67,98 @@ Student deleteStudent(NodeStudent*& S, string data) {
     return temp;
 }
 
-void displayStudentInfo(const NodeStudent* S) {
-    cout << "1. Ho va ten: " << S->data.name << endl;
-    cout << "2. Gioi tinh: " << S->data.gender << endl;
-    cout << "3. ID: " << S->data.ID << endl;
-    cout << "4. Trinh do: " << S->data.level << endl;
-    cout << "5. Tuoi: " << S->data.age << endl;
-}
-
-void displayStudentList(NodeStudent *st){
-    if (st == NULL) {
-        cout << "Danh sach hoc sinh rong." << endl;
+void displayStudentInfo(NodeStudent* S) {
+    if (S == NULL) {
+        cout << "Khong co thong tin sinh vien de hien thi." << endl;
         return;
     }
-    NodeStudent* ptr = st;
-    cout<< "Danh sach hoc sinh:" << endl;
-    while(ptr != NULL){
-        cout<< ptr->data.name << " - "<< ptr->data.ID<< endl;
-        ptr = ptr->next;
-    }
+    cout << "-----------------------------" << endl;
+    cout << "ID         : " << S->data.ID << endl;
+    cout << "Ho va ten  : " << S->data.name << endl;
+    cout << "Tuoi       : " << S->data.age << endl;
+    cout << "Gioi tinh  : " << S->data.gender << endl;
+    cout << "Trinh do   : " << S->data.level << endl;
+    cout << "-----------------------------" << endl;
 }
 
-void changeStudentInfo(NodeStudent*& S){
+
+void changeStudentInfo(NodeStudent*& S) {
+    if (S == NULL) {
+        cout << "Danh sach hoc sinh trong!" << endl;
+        return;
+    }
+
+    NodeStudent* temp = S;
+    cout << "Danh sach hoc sinh hien tai:\n";
+    while (temp != NULL) {
+        cout << "- " << temp->data.ID << " | " << temp->data.name << endl;
+        temp = temp->next;
+    }
     int check = 1;
-    system("cls");
 
     while (check == 1) {
-    	displayStudentList(S);
-        cout << "Nhap ten/ID hoc sinh ban muon thay doi thong tin: ";
-        string name;
-        cin.ignore();  
-        getline(cin, name);  
+        cout << "Nhap ID hoac Ten hoc sinh can thay doi thong tin: ";
+        string input;
+        getline(cin, input);
 
-        NodeStudent* t = searchStudent(S, name);
-        if (t == NULL) 
-            cout << "Danh sach hoc sinh rong." << endl;
-        
-        else {
-            displayStudentInfo(t);
-            cout << "Ban muon thay doi thong tin gi?\n";
-            cout<< "1. Ten hoc sinh" << endl;
-            cout<< "2. ID" << endl;
-            cout<< "3. Tuoi" << endl;
-            cout<< "4. Gioi tinh" << endl;
-            cout<< "5. Trinh do" << endl;
-            cout<< "6. Diem" << endl;
+        NodeStudent* target = searchStudent(S, input);
+        if (target == NULL) {
+            cout << "Khong tim thay hoc sinh \"" << input << "\".\n";
+        } else {
+            displayStudentInfo(target);
+            cout << "---------------------------------\n";
+            cout << "\nBan muon thay doi thong tin gi?\n";
+            cout << "1. Ho va ten\n";
+            cout << "2. Tuoi\n";
+            cout << "3. Gioi tinh\n";
+            cout << "4. Trinh do\n";
+            cout << "5. Tat ca\n";
+            cout << "0. Quay lai menu chinh\n";
+            cout << "---------------------------------\n";
             cout << "Nhap lua chon: ";
             int choice;
             cin >> choice;
+            cin.ignore();
 
             switch (choice) {
-                case 1: {
-                    cout << "Nhap ten moi: ";
-                    string newName;
-                    cin.ignore();
-                    getline(cin, newName);
-                    t->data.name = newName;
+                case 1:
+                    cout << "Nhap ho va ten moi: ";
+                    getline(cin, target->data.name);
                     break;
-                }
-                case 2: {
-                    cout << "Nhap ID moi: ";
-                    string newID;
+                case 2:
+                    cout << "Nhap tuoi moi: ";
+                    cin >> target->data.age;
                     cin.ignore();
-                    getline(cin, newID);
-                    t->data.ID = newID;
                     break;
-                }
-                case 3: {
-                    cout << "Nhap so tuoi moi: ";
-                    int n;
-                    cin.ignore();
-                    cin>> n;
-                    t->data.age = n;
-                    break;
-                }
-                case 4: {
+                case 3:
                     cout << "Nhap gioi tinh moi: ";
-                    string newType;
-                    cin.ignore();
-                    getline(cin, newType);
-                    t->data.gender = newType;
+                    getline(cin, target->data.gender);
                     break;
-                }
-                case 5: {
+                case 4:
                     cout << "Nhap trinh do moi: ";
-                    string newType;
-                    cin.ignore();
-                    getline(cin, newType);
-                    t->data.level = newType;
+                    getline(cin, target->data.level);
                     break;
-                }
-                case 6: {
-                    cout << "Nhap diem moi: ";
-                    int n;
+                case 5:
+                    cout << "Nhap ho va ten moi: ";
+                    getline(cin, target->data.name);
+                    cout << "Nhap tuoi moi: ";
+                    cin >> target->data.age;
                     cin.ignore();
-                    cin>> n;
-                    t->data.grade = n;
+                    cout << "Nhap gioi tinh moi: ";
+                    getline(cin, target->data.gender);
+                    cout << "Nhap trinh do moi: ";
+                    getline(cin, target->data.level);
                     break;
-                }
-				default : {
+                case 0:
+                    cout << "Quay lai menu chinh.\n";
+                    return;
+                default:
                     cout << "Lua chon khong hop le.\n";
                     break;
-                }
             }
+
+            cout << "Thong tin da duoc cap nhat!\n";
         }
-       
-        cout << "\nBan co muon thay doi thong tin khac khong?\n";
-        cout << "1. Co\n";
-        cout << "2. Khong\n";
-        cout << "Nhap lua chon: ";
-        cin >> check;
-        system("cls");  
+        system("cls");
     }
 }

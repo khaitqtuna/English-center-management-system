@@ -130,7 +130,7 @@ void change_infKhoaHoc(QLKH*& k) {
         std::system("cls");  
     }
 }
-void classManagement(QLKH*& course) {
+void KHClassManagement(QLKH*& course) {
     int m = 0;
     do {
         displayClassList(course->data.classes);

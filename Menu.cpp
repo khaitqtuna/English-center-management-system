@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 void menu(){
@@ -31,7 +32,20 @@ void systemManagement(QLKH* ql){
     cout<< endl << "Lua chon:";
 }
 
-void
+void AboutUs(const string& filename) {
+    ifstream infile(filename);
+
+    if (!infile.is_open()) {
+        cout << "Khong the mo file: " << filename << endl;
+        return;
+    }
+
+    string line;
+    while (getline(infile, line)) {
+        cout << line << endl;
+    }
+    infile.close();
+}
 
 int main(){
 

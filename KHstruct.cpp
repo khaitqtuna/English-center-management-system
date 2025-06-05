@@ -6,6 +6,7 @@ using namespace std;
 
 void initQLKH(QLKH*& k) {
     k = NULL;
+    k->countKH = 0;
     k->all = NULL;
 }
 
@@ -25,6 +26,7 @@ void addKhoaHoc(QLKH*& k , KhoaHoc Data){
 	while (temp->next != NULL){
 		temp = temp->next;
 	}
+    k->countKH++;
 	temp->next = newNode;
 }
 
@@ -45,7 +47,9 @@ KhoaHoc deleteKhoaHoc(QLKH*& k , string name){
 	if (t == k){
 		k = k->next;
 		KhoaHoc kh = t->data;
+        k->countKH--;
 		delete t;
+        
 		return kh;
 	}
 	QLKH* temp = k;
@@ -55,6 +59,7 @@ KhoaHoc deleteKhoaHoc(QLKH*& k , string name){
     temp->next = t->next;
     KhoaHoc Data = t->data;
     delete t;
+    k->countKH--;
     return Data;
 }
 void HTKhoaHoc (KhoaHoc Data){
@@ -68,6 +73,7 @@ void HTQLKH(QLKH* k) {
     }
 
     QLKH* temp = k;
+    std::cout << "So luong khoa hoc hien tai: " << k->countKH<<  endl;
     while (temp != NULL) {
         HTKhoaHoc(temp->data);
         std::cout << endl;

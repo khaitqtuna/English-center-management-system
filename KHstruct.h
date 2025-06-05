@@ -18,6 +18,7 @@ struct KhoaHoc {
 
 struct QLKH {
     KhoaHoc data;
+    int countKH;
     NodeTeacher* all;
     QLKH*   next;
 };

@@ -110,6 +110,7 @@ void changeStudentInfo(NodeStudent*& S){
             cout<< "3. Tuoi" << endl;
             cout<< "4. Gioi tinh" << endl;
             cout<< "5. Trinh do" << endl;
+            cout<< "6. Diem" << endl;
             cout << "Nhap lua chon: ";
             int choice;
             cin >> choice;
@@ -153,6 +154,14 @@ void changeStudentInfo(NodeStudent*& S){
                     cin.ignore();
                     getline(cin, newType);
                     t->data.level = newType;
+                    break;
+                }
+                case 6: {
+                    cout << "Nhap diem moi: ";
+                    int n;
+                    cin.ignore();
+                    cin>> n;
+                    t->data.grade = n;
                     break;
                 }
 				default : {

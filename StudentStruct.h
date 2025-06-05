@@ -8,6 +8,7 @@ struct Student {
     int age;
     string level;
     string gender;
+    float grade;
 };
 
 struct NodeStudent {

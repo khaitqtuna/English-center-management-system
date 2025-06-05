@@ -13,6 +13,7 @@ void initNodeClass(NodeClass*& s) {
 NodeClass* createNodeClass(Class data) {
     NodeClass* node = new NodeClass;
     node->data = data;
+    node->data.studentCount = 0; // Initialize studentCount to 0
     node->next = nullptr;
     return node;
 }

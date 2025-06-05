@@ -30,4 +30,3 @@ void displayStudentInfo(const NodeStudent* S);
 void displayStudentList(NodeStudent *st);
 
 void changeStudentInfo(NodeStudent*& S);
-

@@ -3,6 +3,7 @@
 using namespace std;
 
 #include "ClassStruct.h"
+#include "StudentStruct.h"
 
 void initNodeClass(NodeClass*& s) {
     s = nullptr;

@@ -1,8 +1,6 @@
-#include <string>
-using namespace std;
-
 #pragma once
-#include "TeacherStruct.h"
+#include <string>
+#include "Teacher.h"
 #include "KHstruct.h"
 
 struct NodeTeacher;      
@@ -10,16 +8,14 @@ struct NodeClass;
 
 
 struct KhoaHoc {
-    string Name;
+    std::string Name;
     NodeTeacher* teachers;
     NodeClass*   classes;
-    string  type;
-    int classCount;
+    std::string  type;
 };
 
 struct QLKH {
     KhoaHoc data;
-    int countKH;
     NodeTeacher* all;
     QLKH*   next;
 };
@@ -31,6 +27,10 @@ void   addKhoaHoc      (QLKH*& k, KhoaHoc Data);
 QLKH*  seachKhoaHoc    (QLKH*& k, std::string name);
 KhoaHoc deleteKhoaHoc  (QLKH*& k, std::string name);
 
+void   HTKhoaHoc       (KhoaHoc Data);
+void   HTQLKH          (QLKH* k);
+void   change_infKhoaHoc(QLKH*& k);
+void classManagement(QLKH*& course);
 void   HTKhoaHoc       (KhoaHoc Data);
 void   HTQLKH          (QLKH* k);
 void   change_infKhoaHoc(QLKH*& k);

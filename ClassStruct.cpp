@@ -107,8 +107,7 @@ void changeClassInfo(NodeClass* cl){
             cout << "\nBan muon thay doi thong tin gi?\n";
             cout << "1. Ten lop" << endl;
             cout << "2. ID lop" << endl;
-            cout << "3. Si so" << endl;
-            cout << "4. Thay doi thong tin sinh vien" << endl;
+            cout << "3. Thay doi thong tin sinh vien" << endl;
             cout << "Nhap lua chon: ";
             int choice;
             cin >> choice;
@@ -130,13 +129,6 @@ void changeClassInfo(NodeClass* cl){
                     break;
                 }
                 case 3: {
-                    cout << "Nhap si so moi: ";
-                    int n;
-                    cin >> n;
-                    t->data.studentCount = n;
-                    break;
-                }
-                case 4: {
                     int svChoice;
                     do {
                         cout << "\n--- QUAN LY SINH VIEN TRONG LOP ---\n";

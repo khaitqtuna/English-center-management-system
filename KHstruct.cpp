@@ -161,6 +161,7 @@ void classManagement(QLKH*& course) {
                 newClass.studentCount = 0;
                 newClass.listStudent = NULL;
                 addClass(course->data.classes, newClass);
+                course->data.classCount++;
                 std::cout << "Da them lop thanh cong!\n";
                 break;  
             }
@@ -171,6 +172,7 @@ void classManagement(QLKH*& course) {
                 Class deleted = deleteClass(course->data.classes, key);
                 if (deleted.ID != "" || deleted.name != "") {
                     std::cout << "Da xoa lop thanh cong!\n";
+                    course->data.classCount--;
                 } else {
                     std::cout << "Khong tim thay lop \"" << key << "\" de xoa.\n";
                 }

@@ -1,26 +1,24 @@
 #include <iostream>
 #include <string>
-using namespace std;
-
-#include "TeacherStruct.h"
-#include "ClassStruct.h"
+#include "Teacher.h"
+#include "Class.h"
 #include "KHstruct.h"
 
 void initTeacherDS(NodeTeacher* &gv){
-    gv = NULL;
+    gv = nullptr;
 }
 
 NodeTeacher* createNodeTeacher(Teacher data){
     NodeTeacher* newNode = new NodeTeacher;
     newNode->data = data;
-    newNode->next = NULL;
-    newNode->classmanage = NULL;
+    newNode->next = nullptr;
+    newNode->classmanage = nullptr;
     return newNode;
 }
 
 void addTeacher(NodeTeacher* &gv, Teacher data){
     NodeTeacher *newNode = createNodeTeacher(data);
-    if(gv->next == NULL){
+    if(gv == nullptr){
         gv = newNode;
         return;
     }
@@ -28,33 +26,31 @@ void addTeacher(NodeTeacher* &gv, Teacher data){
     gv = newNode;
 }
 
-NodeTeacher* searchTeacher(NodeTeacher* &gv, string data){       //tìm bằng cả tên và ID
+NodeTeacher* searchTeacher(NodeTeacher* &gv, std::string data){       //tìm bằng cả tên và ID
     NodeTeacher* ptr = gv;
-    while(ptr != NULL){
-        if(ptr->data.ID == data)
-            return ptr;
-        else if(ptr->data.name == data)
+    while(ptr != nullptr){
+        if(ptr->data.ID == data || ptr->data.name == data)
             return ptr;
         else 
             ptr = ptr->next;
     }
-    return NULL;
+    return nullptr;
 }
 
-NodeTeacher* deleteTeacher(NodeTeacher* &gv, string data){
-    if(gv == NULL){
-        std::cout<< "Danh sach giao vien trong" << endl;
+NodeTeacher* deleteTeacher(NodeTeacher* &gv, std::string data){
+    if(gv == nullptr){
+        std::cout<< "Danh sach giao vien trong" << std::endl;
         return nullptr;
     }
 
     NodeTeacher* ptr = searchTeacher(gv, data);
-    if(ptr == NULL){
-        std::cout<< "Khong co giao vien can tim" << endl;
+    if(ptr == nullptr){
+        std::cout<< "Khong co giao vien can tim" << std::endl;
         return nullptr;
     }
 
     NodeTeacher *ptr1 = gv;
-    while(ptr1 != NULL && ptr1->next != ptr)        //tra ve phan tu truoc cai can tim
+    while(ptr1 != nullptr && ptr1->next != ptr)        //tra ve phan tu truoc cai can tim
         ptr1 = ptr1->next;
     
     NodeTeacher* temp;
@@ -65,21 +61,21 @@ NodeTeacher* deleteTeacher(NodeTeacher* &gv, string data){
 }
 
 void displayTeacherInfo(NodeTeacher* gv){
-    std::cout<< "1. Ho va ten: " << gv->data.name << endl;
-    std::cout<< "2. ID: " << gv->data.ID << endl;
-    std::cout<< "3. Trinh do: " << gv->data.exp << endl;
-    std::cout<< "4. So nam kinh nghiem: " << gv->data.wexp << endl;
+    std::cout<< "1. Ho va ten: " << gv->data.name << std::endl;
+    std::cout<< "2. ID: " << gv->data.ID << std::endl;
+    std::cout<< "3. Trinh do: " << gv->data.exp << std::endl;
+    std::cout<< "4. So nam kinh nghiem: " << gv->data.wexp << std::endl;
 }
 
 void displayTeacherList(NodeTeacher* gv){
-    if (gv == NULL) {
-        std::cout << "Danh sach giao vien rong." << endl;
+    if (gv == nullptr) {
+        std::cout << "Danh sach giao vien rong." << std::endl;
         return;
     }
     NodeTeacher* ptr = gv;
-    std::cout<< "Danh sach giao vien:" << endl;
-    while(ptr != NULL){
-        std::cout<< ptr->data.name << endl;
+    std::cout<< "Danh sach giao vien:" << std::endl;
+    while(ptr != nullptr){
+        std::cout<< ptr->data.name << std::endl;
         ptr = ptr->next;
     }
 }
@@ -91,72 +87,68 @@ void changeTeacherInfoForCourse(NodeTeacher*& gv){
     while (check == 1) {
     	displayTeacherList(gv);
         std::cout << "Nhap ten/ID giao vien ban muon thay doi thong tin: ";
-        string name;
+        std::string name;
         std::cin.ignore();  
-        getline(std::cin, name);  
+        std::getline(std::cin, name);  
 
         NodeTeacher* t = searchTeacher(gv, name);
-        if (t == NULL) 
-            std::cout << "Danh sach giao vien rong." << endl;
+        if (t == nullptr) 
+            std::cout << "Danh sach giao vien rong." << std::endl;
         
         else {
             displayTeacherInfo(t);
             std::cout << "Ban muon thay doi thong tin gi?\n";
-            std::cout<< "1. Ten giao vien" << endl;
-            std::cout<< "2. ID" << endl;
-            std::cout<< "3. Trinh do" << endl;
-            std::cout<< "4. So nam kinh nghiem" << endl;
+            std::cout<< "1. Ten giao vien" << std::endl;
+            std::cout<< "2. ID" << std::endl;
+            std::cout<< "3. Trinh do" << std::endl;
+            std::cout<< "4. So nam kinh nghiem" << std::endl;
             std::cout << "Nhap lua chon: ";
             int choice;
             std::cin >> choice;
-
+            std::cin.ignore();
             switch (choice) {
                 case 1: {
                     std::cout << "Nhap ten moi: ";
-                    string newName;
-                    std::cin.ignore();
-                    getline(std::cin, newName);
+                    std::string newName;
+                    std::getline(std::cin, newName);
                     t->data.name = newName;
-                    cout << "Thuc hien thanh cong!" << endl;
+                    std::cout << "Thuc hien thanh cong!" << std::endl;
                     break;
                 }
                 case 2: {
                     std::cout << "Nhap ID moi: ";
-                    string newID;
-                    std::cin.ignore();
-                    getline(std::cin, newID);
+                    std::string newID;
+                    std::getline(std::cin, newID);
                     t->data.ID = newID;
-                    cout << "Thuc hien thanh cong!" << endl;
+                    std::cout << "Thuc hien thanh cong!" << std::endl;
                     break;
                 }
                 case 3: {
                     std::cout << "Nhap trinh do moi: ";
-                    string newType;
-                    std::cin.ignore();
-                    getline(std::cin, newType);
+                    std::string newType;
+                    std::getline(std::cin, newType);
                     t->data.exp = newType;
-                    cout << "Thuc hien thanh cong!" << endl;
+                    std::cout << "Thuc hien thanh cong!" << std::endl;
                     break;
                 }
                 case 4: {
                     std::cout << "Nhap so nam kinh nghiem moi: ";
                     int n;
-                    std::cin.ignore();
-                    std::cin>> n;
+                    std::cin >> n;
                     t->data.wexp = n;
-                    cout << "Thuc hien thanh cong!" << endl;
+                    std::cout << "Thuc hien thanh cong!" << std::endl;
                     break;
                 }
-				default : {
+                default : {
                     std::cout << "Lua chon khong hop le.\n";
                     break;
                 }
             }
         }
        
-        std::cout << "Ban co muon thay doi thong tin khac khong?" << endl;
-        std::cout << "1. Co" << endl;
-        std::cout << "2. Khong" << endl;
+        std::cout << "Ban co muon thay doi thong tin khac khong?" << std::endl;
+        std::cout << "1. Co" << std::endl;
+        std::cout << "2. Khong" << std::endl;
         std::cout << "Nhap lua chon:";
         std::cin >> check;
         std::system("cls");  
@@ -166,11 +158,14 @@ void changeTeacherInfoForCourse(NodeTeacher*& gv){
 void changeTeacherInfo(NodeTeacher*& gv){
     int k = 0;
     do{
+        system("cls");
+        std::cout << "===== SUA THONG TIN GIAO VIEN =====\n";
+        std::cout << "---------------------------------\n";
         std::cout << "Ban muon thay doi thong tin gi?\n";
-        std::cout<< "1. Ten giao vien" << endl;
-        std::cout<< "2. ID" << endl;
-        std::cout<< "3. Trinh do" << endl;
-        std::cout<< "4. So nam kinh nghiem" << endl;
+        std::cout<< "1. Ten giao vien" << std::endl;
+        std::cout<< "2. ID" << std::endl;
+        std::cout<< "3. Trinh do" << std::endl;
+        std::cout<< "4. So nam kinh nghiem" << std::endl;
         std::cout << "Nhap lua chon:";
         int choice;
         std::cin >> choice;
@@ -180,37 +175,37 @@ void changeTeacherInfo(NodeTeacher*& gv){
         }
         if(choice == 1){
             std::cout << "Nhap ten moi: ";
-            string newName;
+            std::string newName;
             std::cin.ignore();
-            getline(std::cin, newName);
+            std::getline(std::cin, newName);
             gv->data.name = newName;
         }
         else if(choice == 2){
             std::cout << "Nhap ID moi: ";
-            string newID;
+            std::string newID;
             std::cin.ignore();
-            getline(std::cin, newID);
+            std::getline(std::cin, newID);
             gv->data.ID = newID;
         }
         else if(choice == 3){
             std::cout << "Nhap trinh do moi: ";
-            string newType;
+            std::string newType;
             std::cin.ignore();
-            getline(std::cin, newType);
+            std::getline(std::cin, newType);
             gv->data.exp = newType;
         }
         else if(choice == 4){
             std::cout << "Nhap so nam kinh nghiem moi: ";
             int n;
-            std::cin.ignore();
-            std::cin>> n;
+            std::cin >> n;
             gv->data.wexp = n;
         }
         
-        cout << "Thuc hien thanh cong!" << endl;
-        std::cout << "\nBan co muon tiep tuc sua thong tin khac khong?" << endl;
-        std::cout << "1. Co" << endl;
-        std::cout << "2. Khong"<< endl;
+        std::cout << "Thuc hien thanh cong!" << std::endl;
+        std::system("cls");
+        std::cout << "\nBan co muon tiep tuc sua thong tin khac khong?" << std::endl;
+        std::cout << "1. Co" << std::endl;
+        std::cout << "2. Khong"<< std::endl;
         std::cout << "Nhap lua chon:";
         std::cin >> k;
     }
@@ -221,47 +216,41 @@ void TeacherManagement(QLKH* &course){
     int m = 0;
     do{
         displayTeacherList(course->all);
-        string k;
-        cout << "Nhap ten/ID:";
-        cin >> k;
+        std::string k;
+        std::cout << "Nhap ten/ID:";
+        std::getline(std::cin, k);
+        NodeTeacher *key = searchTeacher(course->all, k);
 
-        QLKH *temp = course;
-        NodeTeacher *key = NULL;
-        while (temp->all != NULL)
-        {
-            key = searchTeacher(temp->all, k);
-            if (key != NULL)
-                break;
-            else
-                temp->all = temp->all->next;
-        }
-
-        if(key == NULL){
-            std::cout<< "Khong tim thay giao vien" << endl;
+        if(key == nullptr){
+            std::cout<< "Khong tim thay giao vien" << std::endl;
             continue;
         }
-
+        std::system("cls");
+        std::cout << "===== CHINH SUA THONG TIN GIAO VIEN =====\n";
         displayTeacherInfo(key);
         int choice = 0;
-        std::cout<< "Nhap lua chon:" << endl;
-        std::cout<< "1. Sua thong tin giao vien" << endl;
-        std::cout<< "2. Xoa thong tin giao vien" << endl;
+        std::cout<< "Nhap lua chon:" << std::endl;
+        std::cout<< "1. Sua thong tin giao vien" << std::endl;
+        std::cout<< "2. Xoa thong tin giao vien" << std::endl;
+        std::cout<< "3. Quay lai" << std::endl;
         std::cin>> choice;
-        while(choice != 1 || choice!= 2){
-            std::cout<< "Lua chon khong hop le, hayh nhap lai:";
+        while(choice != 1 && choice != 2 && choice != 3){
+            std::cout<< "Lua chon khong hop le, hay nhap lai:";
             std::cin>> choice;
         }
         if(choice == 1)
+            system("cls"),
             changeTeacherInfo(key);
         else if(choice == 2)
-            deleteTeacher(temp->data.teachers, k);
-
-        cout << "Thuc hien thanh cong!" << endl;
-        std::cout << "\nBan co muon tiep tuc quan ly giao vien khong?" << endl;
-        std::cout << "1. Co" << endl;
-        std::cout << "2. Khong"<< endl;
+            deleteTeacher(course->all, k);
+        else if(choice == 3)
+            continue;
+        std::system("cls");
+        std::cout << "\nBan co muon tiep tuc quan ly giao vien khong?" << std::endl;
+        std::cout << "1. Co" << std::endl;
+        std::cout << "2. Khong"<< std::endl;
         std::cout << "Nhap lua chon:";
         std::cin >> m;
-        }
+    }
     while(m == 1);
 }

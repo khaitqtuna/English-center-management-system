@@ -1,14 +1,12 @@
 #pragma once
 #include <string>
-using namespace std;
 
 struct Student {
-    string ID;
-    string name;
+    std::string ID;
+    std::string name;
     int age;
-    string level;
-    string gender;
-    float grade;
+    std::string level;
+    std::string gender;
 };
 
 struct NodeStudent {
@@ -17,17 +15,11 @@ struct NodeStudent {
 };
 
 void initStudent(NodeStudent*& S);
-
 NodeStudent* createNodeStudent(Student data);
-
 void addStudent(NodeStudent*& S, Student data);
-
-NodeStudent* searchStudent(NodeStudent*& S, string data);
-
-Student deleteStudent(NodeStudent*& S, string data);
-
-void displayStudentInfo(const NodeStudent* S);
-
-void displayStudentList(NodeStudent *st);
-
+NodeStudent* searchStudent(NodeStudent*& S, std::string data);
+Student deleteStudent(NodeStudent*& S, std::string data);
+void displayStudentInfo(NodeStudent* S);
 void changeStudentInfo(NodeStudent*& S);
+
+

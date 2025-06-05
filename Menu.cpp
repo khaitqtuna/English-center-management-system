@@ -32,7 +32,7 @@ void systemManagement(QLKH* ql){
     cout<< endl << "Lua chon:";
 }
 
-void AboutUs(const string& filename) {
+void AboutUs(const string& filename) { // chức năng giới thiệu trung tâm
     ifstream infile(filename);
 
     if (!infile.is_open()) {
@@ -43,10 +43,10 @@ void AboutUs(const string& filename) {
     string line;
     while (getline(infile, line, ' '))
         cout << line << endl;
-    
+
     infile.close();
 }
 
-int main(){
-
+void Statistic(QLKH *ql){           //chức năng thống kê chung
+    
 }

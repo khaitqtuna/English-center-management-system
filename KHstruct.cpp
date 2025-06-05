@@ -14,6 +14,7 @@ QLKH* createKhoaHoc(KhoaHoc Data) {
     QLKH* k = new QLKH; 
     k->data = Data;
     k->next = NULL;
+    Data->classCount = 0;
     return k;
 }
 void addKhoaHoc(QLKH*& k , KhoaHoc Data){

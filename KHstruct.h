@@ -14,6 +14,7 @@ struct KhoaHoc {
     NodeTeacher* teachers;
     NodeClass*   classes;
     string  type;
+    int classCount;
 };
 
 struct QLKH {

@@ -51,3 +51,21 @@ NodeStudent* importStudentsFromFile(const string& StudentFile) {
     infile.close();
     return newList;
 }
+
+void addStudentFromFile(QLKH *&qlkh, const string& StudentFile){
+    NodeStudent* newStudents = importStudentsFromFile(StudentFile);
+    if (newStudents == NULL) {
+        cout << "Khong co du lieu trong file!" << endl;
+        return;
+    }
+    if (qlkh->S == NULL) {
+        qlkh->S = newStudents;
+    } else {
+        NodeStudent* current = qlkh->S;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newStudents;
+    }
+    cout << "Da them sinh vien tu file thanh cong!" << endl;
+}

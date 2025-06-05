@@ -1,10 +1,10 @@
 #pragma once
-#include "ClassStruct.cpp"
-#include "StudentStruct.h"
+#include <string>
+#include "Student.h"
 
 struct Class {
-    string ID;
-    string name;
+    std::string ID;
+    std::string name;
     int studentCount;
     NodeStudent* listStudent;
 };
@@ -12,23 +12,16 @@ struct Class {
 struct NodeClass {
     Class data;
     NodeClass* next;
-    NodeTeacher* managedBy;
 };
 
 void initNodeClass(NodeClass*& s);
-
 NodeClass* createNodeClass(Class data);
-
 void addClass(NodeClass*& s, Class data);
-
-NodeClass* searchClass(NodeClass* s, string data);
-
-Class deleteClass(NodeClass*& s, string data);
-
+NodeClass* searchClass(NodeClass* s, std::string data);
+Class deleteClass(NodeClass*& s, std::string data);
 void displayClassInfo(NodeClass* cl);
-
 void displayClassList(NodeClass* cl);
+void changeClassInfo(NodeClass*& cl);
 
-void changeClassInfoForCourse(NodeClass* s, string ID);
 
-void TeacherClassManagement(QLKH *&course)
+

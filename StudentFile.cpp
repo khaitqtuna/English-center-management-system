@@ -1,13 +1,14 @@
-﻿#include<iostream>
-#include<string>
-#include<sstream>
-#include<fstream>
-#include<vector>
+﻿#include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include "StudentStruct.h"
 
-void exportStudentToFile(Student S, string& StudentFile) {
-    ofstream outfile(StudentFile);
-    if (!outfile) {
-        std::cout << "ERROR: khong the viet vao file!" << endl;
+void exportStudentToFile(NodeStudent* S, string& StudentFile) {
+    ofstream outfile(StudentFile, ios::out | ios::trunc);
+    if (!outfile.is_open()) {
+        std::cout << "File dang duoc mo, khong the ghi vao file!" << endl;
         return;
     }
     NodeStudent* current = S;
@@ -16,7 +17,7 @@ void exportStudentToFile(Student S, string& StudentFile) {
             << current->data.Name << ","
             << current->data.Age << ","
             << current->data.Level << ","
-            << current->data.Gender << "\n";
+            << current->data.Gender << endl;
         current = current->next;
     }
     outfile.close();
@@ -24,11 +25,11 @@ void exportStudentToFile(Student S, string& StudentFile) {
 
 NodeStudent* importStudentsFromFile(const string& StudentFile) {
     ifstream infile(StudentFile);
-    NodeStudent* newList = NULL;
-    if (!infile) {
-        cout << "ERROR: khong the nhap vao file!" << endl;
+    if (!infile.is_open()) {
+        cout << "File dang duoc mo, khong the doc vao file!" << endl;
         return NULL;
     }
+    NodeStudent* newList = NULL;
     string line;
     while (getline(infile, line)) {
         stringstream ss(line);

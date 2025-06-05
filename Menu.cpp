@@ -41,7 +41,7 @@ void AboutUs(const string& filename) {
     }
 
     string line;
-    while (getline(infile, line)) {
+    while (getline(infile, line )) {
         cout << line << endl;
     }
     infile.close();

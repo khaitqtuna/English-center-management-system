@@ -130,21 +130,22 @@ void change_infKhoaHoc(QLKH*& k) {
         std::system("cls");  
     }
 }
-void KHClassManagement(QLKH*& course) {
-    int m = 0;
+void classManagement(QLKH*& course) {
+    int m = 1;
     do {
         displayClassList(course->data.classes);
         string k;
         if (course->data.classes == NULL) {
-            cout << "Khong co lop nao trong khoa hoc nay.\n";
+            std::cout << "Khong co lop nao trong khoa hoc nay.\n";
             return;
         }
-        cout << "1. Them lop moi\n";
-        cout << "2. Xoa lop\n";
-        cout << "3. Sua thong tin lop\n";
-        cout << "Nhap lua chon: ";
-        cin >> m;
-        cin.ignore(); 
+        std::cout << "1. Them lop moi\n";
+        std::cout << "2. Xoa lop\n";
+        std::cout << "3. Sua thong tin lop\n";
+        std::cout << "Quay lai\n";
+        std::cout << "Nhap lua chon: ";
+        std::cin >> m;
+        std::cin.ignore(); // Chỉ gọi sau khi nhập số
         switch (m) {
             case 1: {
                 Class newClass;
@@ -185,9 +186,13 @@ void KHClassManagement(QLKH*& course) {
                 std::cout << "Lua chon khong hop le. Vui long chon lai.\n";
                 break;
             }
+            case 4: {
+                std::cout << "Quay lai menu chinh.\n";
+                m = 0; // Đặt lại m để thoát khỏi vòng lặp
+                break;
+            }
         }
     } while (m == 1);
 }
-
 
 

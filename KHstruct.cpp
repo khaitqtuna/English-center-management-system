@@ -185,6 +185,7 @@ void KHClassManagement(QLKH*& course) {
                 std::cout << "Lua chon khong hop le. Vui long chon lai.\n";
                 break;
             }
+        }
     } while (m == 1);
 }
 

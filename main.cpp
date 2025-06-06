@@ -7,7 +7,7 @@
 #include "luu.h"
 using namespace std;
 
-// Qu?n lý danh sách toàn c?c
+// Quáº£n lÃ½ danh sÃ¡ch
 QLKH* dsKhoaHoc = nullptr;
 
 

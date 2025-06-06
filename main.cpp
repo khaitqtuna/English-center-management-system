@@ -18,7 +18,6 @@ void thongKe();
 void quanLyKhoaHoc();
 void quanLyGiaoVien();
 void quanLyLopHoc();
-void quanLyHocVien();
 
 void menu() {
     cout << "===== CHUONG TRINH QUAN LY TRUNG TAM TIENG ANH =====\n";
@@ -82,7 +81,6 @@ void systemManagement() {
         cout << "1. Quan ly Khoa hoc" << endl;
         cout << "2. Quan ly Giao vien" << endl;
         cout << "3. Quan ly Lop hoc" << endl;
-        cout << "4. Quan ly Hoc vien" << endl;
         cout << "0. Quay lai" << endl;
         cout << endl << "Lua chon: ";
         if (!(cin >> choice)) {
@@ -266,30 +264,6 @@ void quanLyLopHoc() {
         return;
     }
     classManagement(kh);
-}
-void quanLyHocVien() {
-    if (dsKhoaHoc == nullptr) {
-        cout << "Chua co khoa hoc nao. Hay them khoa hoc truoc!\n";
-        return;
-    }
-    cout << "Nhap ten khoa hoc: ";
-    string name;
-    cin.ignore();
-    getline(cin, name);
-    QLKH* kh = seachKhoaHoc(dsKhoaHoc, name);
-    if (kh == nullptr) {
-        cout << "Khong tim thay khoa hoc!\n";
-        return;
-    }
-    cout << "Nhap ten lop: ";
-    string tenLop;
-    getline(cin, tenLop);
-    NodeClass* lop = searchClass(kh->data.classes, tenLop);
-    if (lop == nullptr) {
-        cout << "Khong tim thay lop!\n";
-        return;
-    }
-    changeClassInfo(lop);
 }
 
 int main() {

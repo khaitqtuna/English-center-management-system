@@ -1,0 +1,48 @@
+KHOAHOC|001|Tieng Anh co ban|A1
+TEACHER|GV01|Nguyen Thi Hoa|Cuu nhan|4
+TEACHER|GV02|Le Van Minh|Thac si|7
+CLASS|CL01|Sang thu 2-4-6|2|GV01
+STUDENT|SV01|Tran Thi Lan|18|Nu|A1
+STUDENT|SV02|Pham Van Khoa|19|Nam|A1
+CLASS|CL02|Chieu thu 3-5-7|1|GV02
+STUDENT|SV03|Nguyen Van Bao|20|Nam|A1
+ALLTEACHER|GV01|Nguyen Thi Hoa|Cuu nhan|4
+ALLTEACHER|GV02|Le Van Minh|Thac si|7
+KHOAHOC|002|Tieng Anh giao tiep|A2
+TEACHER|GV03|Pham Thi Dao|Thac si|6
+CLASS|CL03|Toi thu 2-4-6|2|GV03
+STUDENT|SV04|Doan Thi Mai|21|Nu|A2
+STUDENT|SV05|Nguyen Van Tien|22|Nam|A2
+ALLTEACHER|GV03|Pham Thi Dao|Thac si|6
+KHOAHOC|003|Tieng Anh nang cao|B1
+TEACHER|GV04|Nguyen Van Quang|Tien si|12
+CLASS|CL04|Sang thu 3-5-7|3|GV04
+STUDENT|SV06|Le Thi Thu|23|Nu|B1
+STUDENT|SV07|Tran Van Hieu|24|Nam|B1
+STUDENT|SV08|Nguyen Thi Cam|22|Nu|B1
+ALLTEACHER|GV04|Nguyen Van Quang|Tien si|12
+KHOAHOC|004|Luyen thi IELTS|B2
+TEACHER|GV05|Pham Minh Chau|Thac si|8
+CLASS|CL05|Chieu thu 2-4-6|2|GV05
+STUDENT|SV09|Do Van Son|25|Nam|B2
+STUDENT|SV10|Nguyen Thi Dao|23|Nu|B2
+ALLTEACHER|GV05|Pham Minh Chau|Thac si|8
+KHOAHOC|005|Tieng Anh cho nguoi di lam|A2
+TEACHER|GV06|Nguyen Thi Thu|Thac si|9
+CLASS|CL06|Toi thu 7|2|GV06
+STUDENT|SV11|Pham Minh Tuan|27|Nam|A2
+STUDENT|SV12|Le Thi Hoa|26|Nu|A2
+ALLTEACHER|GV06|Nguyen Thi Thu|Thac si|9
+KHOAHOC|006|Tieng Anh thieu nhi|A1
+TEACHER|GV07|Tran Van Son|Cu nhan|5
+CLASS|CL07|Sang chu nhat|3|GV07
+STUDENT|SV13|Nguyen Minh Chau|10|Nu|A1
+STUDENT|SV14|Le Quang Hieu|11|Nam|A1
+STUDENT|SV15|Tran Bao Han|10|Nu|A1
+ALLTEACHER|GV07|Tran Van Son|Cu nhan|5
+KHOAHOC|007|Tieng Anh doanh nghiep|B1
+TEACHER|GV08|Pham Van Dung|Tien si|15
+CLASS|CL08|Chieu thu 2-4|2|GV08
+STUDENT|SV16|Nguyen Van Phat|32|Nam|B1
+STUDENT|SV17|Le Thi Dao|29|Nu|B1
+ALLTEACHER|GV08|Pham Van Dung|Tien si|15
